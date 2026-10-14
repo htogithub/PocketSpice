@@ -16,7 +16,7 @@
 (function () {
   var d = document.documentElement;
   try { var p = JSON.parse(localStorage.getItem('pocketspice.prefs') || '{}') || {}; if (p.theme === 'light' || p.theme === 'dark') d.setAttribute('data-theme', p.theme); } catch (e) {}
-  try { if (navigator.standalone || (window.matchMedia && matchMedia('(display-mode: standalone)').matches)) d.classList.add('standalone'); } catch (e) {}
+  try { if (navigator.standalone || (window.matchMedia && matchMedia('(display-mode: standalone)').matches)) { d.classList.add('standalone'); d.classList.add('splashing'); } } catch (e) {}
 })();
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -79,15 +79,17 @@ html.standalone #splash { display: flex; }
 #splash.out { opacity: 0; pointer-events: none; }
 #splash svg { width: 30vmin; height: 30vmin; border-radius: 22%; }
 #splash span { color: #e8eef2; font: 600 28px/1 var(--f-cond); letter-spacing: .02em; }
-/* App installée sur l'écran d'accueil : iOS calcule height: 100% trop court en plein écran,
-   on ancre donc l'app sur tout l'écran et chaque barre gère sa propre marge de sécurité. */
+/* App installée sur l'écran d'accueil : iOS peut réserver une bande en bas de l'écran (--vp-gap,
+   mesurée en JS). L'app tient dans la zone visible et ne rajoute la marge du bas que si elle manque. */
 html.standalone { padding: 0; background: var(--chrome); }
-html.standalone #app { position: fixed; top: 0; left: 0; right: 0; bottom: auto; height: 100vh; height: var(--app-h, 100vh); padding-left: env(safe-area-inset-left, 0px); padding-right: env(safe-area-inset-right, 0px); }
-html.standalone .modal, html.standalone #splash { bottom: auto; height: 100vh; height: var(--app-h, 100vh); }
+html.standalone.splashing { background: #0e1822; }
+html.standalone.modal-open { background: var(--surface); }
+html.standalone #app { position: fixed; inset: 0; height: auto; padding-left: env(safe-area-inset-left, 0px); padding-right: env(safe-area-inset-right, 0px); }
 html.standalone .top { padding-top: calc(8px + env(safe-area-inset-top, 0px)); }
-html.standalone .tools { padding-bottom: calc(6px + env(safe-area-inset-bottom, 0px)); }
-html.standalone .net-wrap { padding-bottom: calc(12px + env(safe-area-inset-bottom, 0px)); }
-html.standalone .scroll { padding-bottom: calc(32px + env(safe-area-inset-bottom, 0px)); }
+html.standalone .tools { padding-bottom: max(6px, calc(6px + env(safe-area-inset-bottom, 0px) - var(--vp-gap, 0px))); }
+html.standalone .net-wrap { padding-bottom: max(12px, calc(12px + env(safe-area-inset-bottom, 0px) - var(--vp-gap, 0px))); }
+html.standalone .scroll { padding-bottom: max(32px, calc(32px + env(safe-area-inset-bottom, 0px) - var(--vp-gap, 0px))); }
+html.standalone .modal-card { padding-bottom: max(18px, calc(18px + env(safe-area-inset-bottom, 0px) - var(--vp-gap, 0px))); }
 .iconbtn { flex: 0 0 auto; width: 42px; height: 42px; display: grid; place-items: center; border: 1px solid var(--line); border-radius: 11px; background: var(--surface); color: var(--ink); padding: 0; }
 .iconbtn svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 .iconbtn.sm { width: 36px; height: 36px; border-radius: 10px; }
@@ -2074,11 +2076,12 @@ M3 d g s s MN W=20u L=1u
     const m = $('#modal'), card = $('#modalCard'), top = card.scrollTop;
     card.innerHTML = html;
     card.scrollTop = keepScroll ? top : 0;
+    document.documentElement.classList.add('modal-open');
     m.hidden = false;
     m.onclick = (e) => { if (e.target === m) closeModal(); };
     m.querySelectorAll('[data-close]').forEach((b) => { b.onclick = closeModal; });
   }
-  function closeModal() { $('#modal').hidden = true; }
+  function closeModal() { $('#modal').hidden = true; document.documentElement.classList.remove('modal-open'); }
   const closeBtn = () => `<button class="iconbtn sm" data-close aria-label="${t('a.close')}"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg></button>`;
   function openMenu(keepScroll) {
     const chips = (attr, cur, list) => `<div class="chips">${list.map(([v, l]) => `<button class="chip${cur === v ? ' on' : ''}" ${attr}="${v}">${l}</button>`).join('')}</div>`;
@@ -2272,19 +2275,17 @@ M3 d g s s MN W=20u L=1u
   const standalone = document.documentElement.classList.contains('standalone');
   const splash = document.getElementById('splash');
   if (splash) {
-    if (standalone) requestAnimationFrame(() => setTimeout(() => { splash.classList.add('out'); setTimeout(() => splash.remove(), 450); }, 280));
+    if (standalone) requestAnimationFrame(() => setTimeout(() => { splash.classList.add('out'); setTimeout(() => { splash.remove(); document.documentElement.classList.remove('splashing'); }, 450); }, 280));
     else splash.remove();
   }
-  // En plein écran, iOS peut calculer une hauteur trop courte (de la hauteur de la barre d'état) :
-  // on compare à la vraie taille de l'écran et on fixe la hauteur de l'app si besoin.
+  // En plein écran, iOS peut limiter la zone d'affichage à une hauteur inférieure à l'écran :
+  // on mesure l'écart avec la vraie hauteur et la marge du bas en tient compte (CSS --vp-gap).
   function fixStandaloneHeight() {
     if (!standalone) return;
-    const root = document.documentElement, app = document.getElementById('app');
-    root.style.removeProperty('--app-h');
     const portrait = window.innerHeight >= window.innerWidth;
     const full = portrait ? Math.max(screen.width, screen.height) : Math.min(screen.width, screen.height);
-    const h = app.getBoundingClientRect().height;
-    if (full - h > 1 && full - h < 160) root.style.setProperty('--app-h', full + 'px');
+    const gap = Math.round(full - window.innerHeight);
+    if (gap >= 0 && gap < 160) document.documentElement.style.setProperty('--vp-gap', gap + 'px');
     schedule(); positionFloat();
   }
   if (standalone) {
