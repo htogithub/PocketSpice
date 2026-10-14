@@ -2,7 +2,7 @@
 
 A mobile-first electrical circuit simulator that runs in the browser. Draw a schematic with your finger, tap **Run**, and the voltage at every node and the current through every component appear right on the drawing.
 
-The app is a single HTML file: nothing to install, no account required. On iPhone, open the website link from the About section in Safari, then tap Share → "Add to Home Screen" to use it like a native app.
+The app is a single HTML file: nothing to install, no account required. On iPhone, open the website link from the About section in Safari, then tap Share → "Add to Home Screen". It then opens full screen with its own icon and launch screen, and keeps working offline.
 
 > The interface is available in English and French.
 
@@ -82,6 +82,9 @@ Two extra elements are available in netlists: E (voltage-controlled voltage sour
   - Ctrl/Cmd + Z to undo;
   - Esc to deselect.
 - Light, dark or automatic theme, and English or French interface, chosen from the menu and remembered.
+- Installable web app: home-screen icon, full-screen display, launch screen.
+- Works offline after the first launch, thanks to a service worker.
+- Export a circuit as a `.json` file (through the share sheet on iPhone) and import it back on any device.
 - The circuit and the netlist are saved automatically in the browser.
 - Five ready-to-run examples:
   - voltage divider;
@@ -190,17 +193,18 @@ A `.model` that omits some parameters uses the standard SPICE defaults (for exam
 ---
 
 ## How it works
-- A single `index.html` file of about 100 KB: plain HTML, CSS and JavaScript, with no framework and no build step.
+- One `index.html` file of about 155 KB containing all the HTML, CSS and JavaScript, with no framework and no build step.
+- A web app manifest (`manifest.webmanifest`), a service worker (`sw.js`) for offline use, and three PNG icons.
 - The schematic is rendered as SVG; gestures (drag, pinch) use Pointer Events.
 - The simulation engine is written in JavaScript:
   - modified nodal analysis;
   - Gaussian elimination with partial pivoting;
   - Newton-Raphson with junction limiting;
   - GMIN stepping and source stepping as fallbacks.
-- The only external resource is the Barlow font (Google Fonts). Offline, the app falls back to the system font.
+- The only external resource is the Barlow font (Google Fonts). It is cached for offline use; if it cannot load, the app falls back to the system font.
 
 ## Host your own copy
-1. Create a public repository and upload `index.html`.
+1. Create a public repository and upload these files to its root: `index.html`, `manifest.webmanifest`, `sw.js`, `icon-180.png`, `icon-192.png` and `icon-512.png`.
 2. In **Settings → Pages**, choose "Deploy from a branch", branch `main` and folder `/ (root)`.
 3. After a minute or two, the app is live at `https://username.github.io/repository-name/`.
 

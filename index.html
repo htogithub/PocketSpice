@@ -6,7 +6,19 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="PocketSpice">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" id="themeColor" content="#1c2a39">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icon-180.png">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
 <title>PocketSpice</title>
+<script>
+(function () {
+  var d = document.documentElement;
+  try { var p = JSON.parse(localStorage.getItem('pocketspice.prefs') || '{}') || {}; if (p.theme === 'light' || p.theme === 'dark') d.setAttribute('data-theme', p.theme); } catch (e) {}
+  try { if (navigator.standalone || (window.matchMedia && matchMedia('(display-mode: standalone)').matches)) d.classList.add('standalone'); } catch (e) {}
+})();
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:wght@500;600&display=swap" rel="stylesheet">
@@ -18,6 +30,7 @@
   --lcd: #c4d0ae; --lcd-ink: #1d2914; --amp: #9a4310;
   --err: #b3261e; --err-bg: #fbe9e7; --warn: #6f4f00; --warn-bg: #fdf1cc;
   --shadow: 0 6px 22px rgba(20, 35, 50, .18);
+  --head: #1c2a39; --head-seg: #26374a; --head-line: #2f4258; --head-txt: #a9b8c6; --head-on: #e8eef2; --head-on-ink: #1c2a39; --head-btn: #26374a; --head-btn-ink: #e8eef2;
   --f-ui: "Barlow", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   --f-cond: "Barlow Condensed", "Arial Narrow", "Barlow", system-ui, sans-serif;
   --f-code: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
@@ -31,6 +44,7 @@
     --lcd: #22301a; --lcd-ink: #c2ec92; --amp: #f2a463;
     --err: #ff8c7d; --err-bg: #3a1f1c; --warn: #f1c75c; --warn-bg: #33290f;
     --shadow: 0 6px 22px rgba(0, 0, 0, .5);
+    --head: #0e151b; --head-seg: #121b23; --head-line: #26333e; --head-txt: #8d9eac; --head-on: #d5dfe7; --head-on-ink: #0e151b; --head-btn: #17212a; --head-btn-ink: #d5dfe7;
     color-scheme: dark;
   }
 }
@@ -41,11 +55,12 @@
   --lcd: #22301a; --lcd-ink: #c2ec92; --amp: #f2a463;
   --err: #ff8c7d; --err-bg: #3a1f1c; --warn: #f1c75c; --warn-bg: #33290f;
   --shadow: 0 6px 22px rgba(0, 0, 0, .5);
+  --head: #0e151b; --head-seg: #121b23; --head-line: #26333e; --head-txt: #8d9eac; --head-on: #d5dfe7; --head-on-ink: #0e151b; --head-btn: #17212a; --head-btn-ink: #d5dfe7;
   color-scheme: dark;
 }
 :root { box-sizing: border-box; padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); }
 *, *::before, *::after { box-sizing: inherit; }
-html { height: 100%; scroll-padding-top: env(safe-area-inset-top, 0px); background: var(--chrome); }
+html { height: 100%; scroll-padding-top: env(safe-area-inset-top, 0px); background: linear-gradient(var(--head) 0 50%, var(--chrome) 50% 100%); }
 body { height: 100%; margin: 0; overflow: hidden; background: var(--chrome); color: var(--ink); font: 400 16px/1.4 var(--f-ui); -webkit-text-size-adjust: 100%; overscroll-behavior: none; -webkit-tap-highlight-color: transparent; }
 [hidden] { display: none !important; }
 button { font: inherit; color: inherit; cursor: pointer; }
@@ -53,10 +68,17 @@ button:focus-visible, input:focus-visible, textarea:focus-visible, summary:focus
 #app { height: 100%; display: flex; flex-direction: column; }
 
 /* barre du haut */
-.top { display: flex; align-items: center; gap: 8px; padding: 8px 10px; border-bottom: 1px solid var(--line); background: var(--chrome); }
-.seg { flex: 1; display: flex; gap: 2px; padding: 3px; border: 1px solid var(--line); border-radius: 10px; background: var(--paper); }
-.seg button { flex: 1; border: 0; background: transparent; color: var(--ink2); font: 600 15px/1 var(--f-ui); padding: 9px 4px; border-radius: 7px; }
-.seg button.on { background: var(--ink); color: var(--chrome); }
+.top { display: flex; align-items: center; gap: 8px; padding: 8px 10px; border-bottom: 1px solid var(--head-line); background: var(--head); }
+.seg { flex: 1; display: flex; gap: 2px; padding: 3px; border: 1px solid var(--head-line); border-radius: 10px; background: var(--head-seg); }
+.seg button { flex: 1; border: 0; background: transparent; color: var(--head-txt); font: 600 15px/1 var(--f-ui); padding: 9px 4px; border-radius: 7px; }
+.seg button.on { background: var(--head-on); color: var(--head-on-ink); }
+.top .iconbtn { background: var(--head-btn); color: var(--head-btn-ink); border-color: var(--head-line); }
+.top, .tools, .ftools, #run, .chip, .btn, .mitem, .sh-head, .field label, .flabel { -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; }
+#splash { position: fixed; inset: 0; z-index: 100; display: none; flex-direction: column; align-items: center; justify-content: center; gap: 22px; background: #0e1822; transition: opacity .35s ease; }
+html.standalone #splash { display: flex; }
+#splash.out { opacity: 0; pointer-events: none; }
+#splash svg { width: 30vmin; height: 30vmin; border-radius: 22%; }
+#splash span { color: #e8eef2; font: 600 28px/1 var(--f-cond); letter-spacing: .02em; }
 .iconbtn { flex: 0 0 auto; width: 42px; height: 42px; display: grid; place-items: center; border: 1px solid var(--line); border-radius: 11px; background: var(--surface); color: var(--ink); padding: 0; }
 .iconbtn svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 .iconbtn.sm { width: 36px; height: 36px; border-radius: 10px; }
@@ -192,6 +214,18 @@ h3.sec { margin: 22px 0 6px; font: 600 18px/1.2 var(--f-cond); }
 </style>
 </head>
 <body>
+<div id="splash" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+<rect width="512" height="512" fill="#142230"/>
+<g fill="#22364a"><circle cx="32" cy="32" r="4.5"/><circle cx="32" cy="64" r="4.5"/><circle cx="32" cy="96" r="4.5"/><circle cx="32" cy="128" r="4.5"/><circle cx="32" cy="160" r="4.5"/><circle cx="32" cy="192" r="4.5"/><circle cx="32" cy="224" r="4.5"/><circle cx="32" cy="256" r="4.5"/><circle cx="32" cy="288" r="4.5"/><circle cx="32" cy="320" r="4.5"/><circle cx="32" cy="352" r="4.5"/><circle cx="32" cy="384" r="4.5"/><circle cx="32" cy="416" r="4.5"/><circle cx="32" cy="448" r="4.5"/><circle cx="32" cy="480" r="4.5"/><circle cx="64" cy="32" r="4.5"/><circle cx="64" cy="64" r="4.5"/><circle cx="64" cy="96" r="4.5"/><circle cx="64" cy="128" r="4.5"/><circle cx="64" cy="160" r="4.5"/><circle cx="64" cy="192" r="4.5"/><circle cx="64" cy="224" r="4.5"/><circle cx="64" cy="256" r="4.5"/><circle cx="64" cy="288" r="4.5"/><circle cx="64" cy="320" r="4.5"/><circle cx="64" cy="352" r="4.5"/><circle cx="64" cy="384" r="4.5"/><circle cx="64" cy="416" r="4.5"/><circle cx="64" cy="448" r="4.5"/><circle cx="64" cy="480" r="4.5"/><circle cx="96" cy="32" r="4.5"/><circle cx="96" cy="64" r="4.5"/><circle cx="96" cy="96" r="4.5"/><circle cx="96" cy="128" r="4.5"/><circle cx="96" cy="160" r="4.5"/><circle cx="96" cy="192" r="4.5"/><circle cx="96" cy="224" r="4.5"/><circle cx="96" cy="256" r="4.5"/><circle cx="96" cy="288" r="4.5"/><circle cx="96" cy="320" r="4.5"/><circle cx="96" cy="352" r="4.5"/><circle cx="96" cy="384" r="4.5"/><circle cx="96" cy="416" r="4.5"/><circle cx="96" cy="448" r="4.5"/><circle cx="96" cy="480" r="4.5"/><circle cx="128" cy="32" r="4.5"/><circle cx="128" cy="64" r="4.5"/><circle cx="128" cy="96" r="4.5"/><circle cx="128" cy="128" r="4.5"/><circle cx="128" cy="160" r="4.5"/><circle cx="128" cy="192" r="4.5"/><circle cx="128" cy="224" r="4.5"/><circle cx="128" cy="256" r="4.5"/><circle cx="128" cy="288" r="4.5"/><circle cx="128" cy="320" r="4.5"/><circle cx="128" cy="352" r="4.5"/><circle cx="128" cy="384" r="4.5"/><circle cx="128" cy="416" r="4.5"/><circle cx="128" cy="448" r="4.5"/><circle cx="128" cy="480" r="4.5"/><circle cx="160" cy="32" r="4.5"/><circle cx="160" cy="64" r="4.5"/><circle cx="160" cy="96" r="4.5"/><circle cx="160" cy="128" r="4.5"/><circle cx="160" cy="160" r="4.5"/><circle cx="160" cy="192" r="4.5"/><circle cx="160" cy="224" r="4.5"/><circle cx="160" cy="256" r="4.5"/><circle cx="160" cy="288" r="4.5"/><circle cx="160" cy="320" r="4.5"/><circle cx="160" cy="352" r="4.5"/><circle cx="160" cy="384" r="4.5"/><circle cx="160" cy="416" r="4.5"/><circle cx="160" cy="448" r="4.5"/><circle cx="160" cy="480" r="4.5"/><circle cx="192" cy="32" r="4.5"/><circle cx="192" cy="64" r="4.5"/><circle cx="192" cy="96" r="4.5"/><circle cx="192" cy="128" r="4.5"/><circle cx="192" cy="160" r="4.5"/><circle cx="192" cy="192" r="4.5"/><circle cx="192" cy="224" r="4.5"/><circle cx="192" cy="256" r="4.5"/><circle cx="192" cy="288" r="4.5"/><circle cx="192" cy="320" r="4.5"/><circle cx="192" cy="352" r="4.5"/><circle cx="192" cy="384" r="4.5"/><circle cx="192" cy="416" r="4.5"/><circle cx="192" cy="448" r="4.5"/><circle cx="192" cy="480" r="4.5"/><circle cx="224" cy="32" r="4.5"/><circle cx="224" cy="64" r="4.5"/><circle cx="224" cy="96" r="4.5"/><circle cx="224" cy="128" r="4.5"/><circle cx="224" cy="160" r="4.5"/><circle cx="224" cy="192" r="4.5"/><circle cx="224" cy="224" r="4.5"/><circle cx="224" cy="256" r="4.5"/><circle cx="224" cy="288" r="4.5"/><circle cx="224" cy="320" r="4.5"/><circle cx="224" cy="352" r="4.5"/><circle cx="224" cy="384" r="4.5"/><circle cx="224" cy="416" r="4.5"/><circle cx="224" cy="448" r="4.5"/><circle cx="224" cy="480" r="4.5"/><circle cx="256" cy="32" r="4.5"/><circle cx="256" cy="64" r="4.5"/><circle cx="256" cy="96" r="4.5"/><circle cx="256" cy="128" r="4.5"/><circle cx="256" cy="160" r="4.5"/><circle cx="256" cy="192" r="4.5"/><circle cx="256" cy="224" r="4.5"/><circle cx="256" cy="256" r="4.5"/><circle cx="256" cy="288" r="4.5"/><circle cx="256" cy="320" r="4.5"/><circle cx="256" cy="352" r="4.5"/><circle cx="256" cy="384" r="4.5"/><circle cx="256" cy="416" r="4.5"/><circle cx="256" cy="448" r="4.5"/><circle cx="256" cy="480" r="4.5"/><circle cx="288" cy="32" r="4.5"/><circle cx="288" cy="64" r="4.5"/><circle cx="288" cy="96" r="4.5"/><circle cx="288" cy="128" r="4.5"/><circle cx="288" cy="160" r="4.5"/><circle cx="288" cy="192" r="4.5"/><circle cx="288" cy="224" r="4.5"/><circle cx="288" cy="256" r="4.5"/><circle cx="288" cy="288" r="4.5"/><circle cx="288" cy="320" r="4.5"/><circle cx="288" cy="352" r="4.5"/><circle cx="288" cy="384" r="4.5"/><circle cx="288" cy="416" r="4.5"/><circle cx="288" cy="448" r="4.5"/><circle cx="288" cy="480" r="4.5"/><circle cx="320" cy="32" r="4.5"/><circle cx="320" cy="64" r="4.5"/><circle cx="320" cy="96" r="4.5"/><circle cx="320" cy="128" r="4.5"/><circle cx="320" cy="160" r="4.5"/><circle cx="320" cy="192" r="4.5"/><circle cx="320" cy="224" r="4.5"/><circle cx="320" cy="256" r="4.5"/><circle cx="320" cy="288" r="4.5"/><circle cx="320" cy="320" r="4.5"/><circle cx="320" cy="352" r="4.5"/><circle cx="320" cy="384" r="4.5"/><circle cx="320" cy="416" r="4.5"/><circle cx="320" cy="448" r="4.5"/><circle cx="320" cy="480" r="4.5"/><circle cx="352" cy="32" r="4.5"/><circle cx="352" cy="64" r="4.5"/><circle cx="352" cy="96" r="4.5"/><circle cx="352" cy="128" r="4.5"/><circle cx="352" cy="160" r="4.5"/><circle cx="352" cy="192" r="4.5"/><circle cx="352" cy="224" r="4.5"/><circle cx="352" cy="256" r="4.5"/><circle cx="352" cy="288" r="4.5"/><circle cx="352" cy="320" r="4.5"/><circle cx="352" cy="352" r="4.5"/><circle cx="352" cy="384" r="4.5"/><circle cx="352" cy="416" r="4.5"/><circle cx="352" cy="448" r="4.5"/><circle cx="352" cy="480" r="4.5"/><circle cx="384" cy="32" r="4.5"/><circle cx="384" cy="64" r="4.5"/><circle cx="384" cy="96" r="4.5"/><circle cx="384" cy="128" r="4.5"/><circle cx="384" cy="160" r="4.5"/><circle cx="384" cy="192" r="4.5"/><circle cx="384" cy="224" r="4.5"/><circle cx="384" cy="256" r="4.5"/><circle cx="384" cy="288" r="4.5"/><circle cx="384" cy="320" r="4.5"/><circle cx="384" cy="352" r="4.5"/><circle cx="384" cy="384" r="4.5"/><circle cx="384" cy="416" r="4.5"/><circle cx="384" cy="448" r="4.5"/><circle cx="384" cy="480" r="4.5"/><circle cx="416" cy="32" r="4.5"/><circle cx="416" cy="64" r="4.5"/><circle cx="416" cy="96" r="4.5"/><circle cx="416" cy="128" r="4.5"/><circle cx="416" cy="160" r="4.5"/><circle cx="416" cy="192" r="4.5"/><circle cx="416" cy="224" r="4.5"/><circle cx="416" cy="256" r="4.5"/><circle cx="416" cy="288" r="4.5"/><circle cx="416" cy="320" r="4.5"/><circle cx="416" cy="352" r="4.5"/><circle cx="416" cy="384" r="4.5"/><circle cx="416" cy="416" r="4.5"/><circle cx="416" cy="448" r="4.5"/><circle cx="416" cy="480" r="4.5"/><circle cx="448" cy="32" r="4.5"/><circle cx="448" cy="64" r="4.5"/><circle cx="448" cy="96" r="4.5"/><circle cx="448" cy="128" r="4.5"/><circle cx="448" cy="160" r="4.5"/><circle cx="448" cy="192" r="4.5"/><circle cx="448" cy="224" r="4.5"/><circle cx="448" cy="256" r="4.5"/><circle cx="448" cy="288" r="4.5"/><circle cx="448" cy="320" r="4.5"/><circle cx="448" cy="352" r="4.5"/><circle cx="448" cy="384" r="4.5"/><circle cx="448" cy="416" r="4.5"/><circle cx="448" cy="448" r="4.5"/><circle cx="448" cy="480" r="4.5"/><circle cx="480" cy="32" r="4.5"/><circle cx="480" cy="64" r="4.5"/><circle cx="480" cy="96" r="4.5"/><circle cx="480" cy="128" r="4.5"/><circle cx="480" cy="160" r="4.5"/><circle cx="480" cy="192" r="4.5"/><circle cx="480" cy="224" r="4.5"/><circle cx="480" cy="256" r="4.5"/><circle cx="480" cy="288" r="4.5"/><circle cx="480" cy="320" r="4.5"/><circle cx="480" cy="352" r="4.5"/><circle cx="480" cy="384" r="4.5"/><circle cx="480" cy="416" r="4.5"/><circle cx="480" cy="448" r="4.5"/><circle cx="480" cy="480" r="4.5"/></g>
+<g fill="none" stroke="#e8eef2" stroke-width="20" stroke-linejoin="round" stroke-linecap="round">
+<path d="M112 238 V136 H400 V376 H112 V274"/>
+<rect x="374" y="196" width="52" height="120" rx="3" fill="#142230"/>
+</g>
+<g stroke="#e8eef2" stroke-width="20" stroke-linecap="round"><path d="M72 238 H152 M72 274 H152"/></g>
+<g fill="#e8eef2"><circle cx="400" cy="136" r="17"/><circle cx="112" cy="376" r="17"/></g>
+<path d="M296 176 L184 312 H250 L216 420 L338 270 H270 L312 176 Z" fill="#f3c623" stroke="#142230" stroke-width="18" stroke-linejoin="round" paint-order="stroke"/>
+</svg><span>PocketSpice</span></div>
+<input type="file" id="importFile" accept=".json,application/json" hidden>
 <div id="app">
   <header class="top">
     <div class="seg" role="tablist" data-i18n-aria="a.views">
@@ -244,6 +278,9 @@ h3.sec { margin: 22px 0 6px; font: 600 18px/1.2 var(--f-cond); }
 </div>
 <div class="modal" id="modal" hidden><div class="modal-card" id="modalCard"></div></div>
 <div id="toast" role="status" aria-live="polite"></div>
+<script>
+const LOGO_SVG = "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 512 512\">\n<rect width=\"512\" height=\"512\" fill=\"#142230\"/>\n<g fill=\"#22364a\"><circle cx=\"32\" cy=\"32\" r=\"4.5\"/><circle cx=\"32\" cy=\"64\" r=\"4.5\"/><circle cx=\"32\" cy=\"96\" r=\"4.5\"/><circle cx=\"32\" cy=\"128\" r=\"4.5\"/><circle cx=\"32\" cy=\"160\" r=\"4.5\"/><circle cx=\"32\" cy=\"192\" r=\"4.5\"/><circle cx=\"32\" cy=\"224\" r=\"4.5\"/><circle cx=\"32\" cy=\"256\" r=\"4.5\"/><circle cx=\"32\" cy=\"288\" r=\"4.5\"/><circle cx=\"32\" cy=\"320\" r=\"4.5\"/><circle cx=\"32\" cy=\"352\" r=\"4.5\"/><circle cx=\"32\" cy=\"384\" r=\"4.5\"/><circle cx=\"32\" cy=\"416\" r=\"4.5\"/><circle cx=\"32\" cy=\"448\" r=\"4.5\"/><circle cx=\"32\" cy=\"480\" r=\"4.5\"/><circle cx=\"64\" cy=\"32\" r=\"4.5\"/><circle cx=\"64\" cy=\"64\" r=\"4.5\"/><circle cx=\"64\" cy=\"96\" r=\"4.5\"/><circle cx=\"64\" cy=\"128\" r=\"4.5\"/><circle cx=\"64\" cy=\"160\" r=\"4.5\"/><circle cx=\"64\" cy=\"192\" r=\"4.5\"/><circle cx=\"64\" cy=\"224\" r=\"4.5\"/><circle cx=\"64\" cy=\"256\" r=\"4.5\"/><circle cx=\"64\" cy=\"288\" r=\"4.5\"/><circle cx=\"64\" cy=\"320\" r=\"4.5\"/><circle cx=\"64\" cy=\"352\" r=\"4.5\"/><circle cx=\"64\" cy=\"384\" r=\"4.5\"/><circle cx=\"64\" cy=\"416\" r=\"4.5\"/><circle cx=\"64\" cy=\"448\" r=\"4.5\"/><circle cx=\"64\" cy=\"480\" r=\"4.5\"/><circle cx=\"96\" cy=\"32\" r=\"4.5\"/><circle cx=\"96\" cy=\"64\" r=\"4.5\"/><circle cx=\"96\" cy=\"96\" r=\"4.5\"/><circle cx=\"96\" cy=\"128\" r=\"4.5\"/><circle cx=\"96\" cy=\"160\" r=\"4.5\"/><circle cx=\"96\" cy=\"192\" r=\"4.5\"/><circle cx=\"96\" cy=\"224\" r=\"4.5\"/><circle cx=\"96\" cy=\"256\" r=\"4.5\"/><circle cx=\"96\" cy=\"288\" r=\"4.5\"/><circle cx=\"96\" cy=\"320\" r=\"4.5\"/><circle cx=\"96\" cy=\"352\" r=\"4.5\"/><circle cx=\"96\" cy=\"384\" r=\"4.5\"/><circle cx=\"96\" cy=\"416\" r=\"4.5\"/><circle cx=\"96\" cy=\"448\" r=\"4.5\"/><circle cx=\"96\" cy=\"480\" r=\"4.5\"/><circle cx=\"128\" cy=\"32\" r=\"4.5\"/><circle cx=\"128\" cy=\"64\" r=\"4.5\"/><circle cx=\"128\" cy=\"96\" r=\"4.5\"/><circle cx=\"128\" cy=\"128\" r=\"4.5\"/><circle cx=\"128\" cy=\"160\" r=\"4.5\"/><circle cx=\"128\" cy=\"192\" r=\"4.5\"/><circle cx=\"128\" cy=\"224\" r=\"4.5\"/><circle cx=\"128\" cy=\"256\" r=\"4.5\"/><circle cx=\"128\" cy=\"288\" r=\"4.5\"/><circle cx=\"128\" cy=\"320\" r=\"4.5\"/><circle cx=\"128\" cy=\"352\" r=\"4.5\"/><circle cx=\"128\" cy=\"384\" r=\"4.5\"/><circle cx=\"128\" cy=\"416\" r=\"4.5\"/><circle cx=\"128\" cy=\"448\" r=\"4.5\"/><circle cx=\"128\" cy=\"480\" r=\"4.5\"/><circle cx=\"160\" cy=\"32\" r=\"4.5\"/><circle cx=\"160\" cy=\"64\" r=\"4.5\"/><circle cx=\"160\" cy=\"96\" r=\"4.5\"/><circle cx=\"160\" cy=\"128\" r=\"4.5\"/><circle cx=\"160\" cy=\"160\" r=\"4.5\"/><circle cx=\"160\" cy=\"192\" r=\"4.5\"/><circle cx=\"160\" cy=\"224\" r=\"4.5\"/><circle cx=\"160\" cy=\"256\" r=\"4.5\"/><circle cx=\"160\" cy=\"288\" r=\"4.5\"/><circle cx=\"160\" cy=\"320\" r=\"4.5\"/><circle cx=\"160\" cy=\"352\" r=\"4.5\"/><circle cx=\"160\" cy=\"384\" r=\"4.5\"/><circle cx=\"160\" cy=\"416\" r=\"4.5\"/><circle cx=\"160\" cy=\"448\" r=\"4.5\"/><circle cx=\"160\" cy=\"480\" r=\"4.5\"/><circle cx=\"192\" cy=\"32\" r=\"4.5\"/><circle cx=\"192\" cy=\"64\" r=\"4.5\"/><circle cx=\"192\" cy=\"96\" r=\"4.5\"/><circle cx=\"192\" cy=\"128\" r=\"4.5\"/><circle cx=\"192\" cy=\"160\" r=\"4.5\"/><circle cx=\"192\" cy=\"192\" r=\"4.5\"/><circle cx=\"192\" cy=\"224\" r=\"4.5\"/><circle cx=\"192\" cy=\"256\" r=\"4.5\"/><circle cx=\"192\" cy=\"288\" r=\"4.5\"/><circle cx=\"192\" cy=\"320\" r=\"4.5\"/><circle cx=\"192\" cy=\"352\" r=\"4.5\"/><circle cx=\"192\" cy=\"384\" r=\"4.5\"/><circle cx=\"192\" cy=\"416\" r=\"4.5\"/><circle cx=\"192\" cy=\"448\" r=\"4.5\"/><circle cx=\"192\" cy=\"480\" r=\"4.5\"/><circle cx=\"224\" cy=\"32\" r=\"4.5\"/><circle cx=\"224\" cy=\"64\" r=\"4.5\"/><circle cx=\"224\" cy=\"96\" r=\"4.5\"/><circle cx=\"224\" cy=\"128\" r=\"4.5\"/><circle cx=\"224\" cy=\"160\" r=\"4.5\"/><circle cx=\"224\" cy=\"192\" r=\"4.5\"/><circle cx=\"224\" cy=\"224\" r=\"4.5\"/><circle cx=\"224\" cy=\"256\" r=\"4.5\"/><circle cx=\"224\" cy=\"288\" r=\"4.5\"/><circle cx=\"224\" cy=\"320\" r=\"4.5\"/><circle cx=\"224\" cy=\"352\" r=\"4.5\"/><circle cx=\"224\" cy=\"384\" r=\"4.5\"/><circle cx=\"224\" cy=\"416\" r=\"4.5\"/><circle cx=\"224\" cy=\"448\" r=\"4.5\"/><circle cx=\"224\" cy=\"480\" r=\"4.5\"/><circle cx=\"256\" cy=\"32\" r=\"4.5\"/><circle cx=\"256\" cy=\"64\" r=\"4.5\"/><circle cx=\"256\" cy=\"96\" r=\"4.5\"/><circle cx=\"256\" cy=\"128\" r=\"4.5\"/><circle cx=\"256\" cy=\"160\" r=\"4.5\"/><circle cx=\"256\" cy=\"192\" r=\"4.5\"/><circle cx=\"256\" cy=\"224\" r=\"4.5\"/><circle cx=\"256\" cy=\"256\" r=\"4.5\"/><circle cx=\"256\" cy=\"288\" r=\"4.5\"/><circle cx=\"256\" cy=\"320\" r=\"4.5\"/><circle cx=\"256\" cy=\"352\" r=\"4.5\"/><circle cx=\"256\" cy=\"384\" r=\"4.5\"/><circle cx=\"256\" cy=\"416\" r=\"4.5\"/><circle cx=\"256\" cy=\"448\" r=\"4.5\"/><circle cx=\"256\" cy=\"480\" r=\"4.5\"/><circle cx=\"288\" cy=\"32\" r=\"4.5\"/><circle cx=\"288\" cy=\"64\" r=\"4.5\"/><circle cx=\"288\" cy=\"96\" r=\"4.5\"/><circle cx=\"288\" cy=\"128\" r=\"4.5\"/><circle cx=\"288\" cy=\"160\" r=\"4.5\"/><circle cx=\"288\" cy=\"192\" r=\"4.5\"/><circle cx=\"288\" cy=\"224\" r=\"4.5\"/><circle cx=\"288\" cy=\"256\" r=\"4.5\"/><circle cx=\"288\" cy=\"288\" r=\"4.5\"/><circle cx=\"288\" cy=\"320\" r=\"4.5\"/><circle cx=\"288\" cy=\"352\" r=\"4.5\"/><circle cx=\"288\" cy=\"384\" r=\"4.5\"/><circle cx=\"288\" cy=\"416\" r=\"4.5\"/><circle cx=\"288\" cy=\"448\" r=\"4.5\"/><circle cx=\"288\" cy=\"480\" r=\"4.5\"/><circle cx=\"320\" cy=\"32\" r=\"4.5\"/><circle cx=\"320\" cy=\"64\" r=\"4.5\"/><circle cx=\"320\" cy=\"96\" r=\"4.5\"/><circle cx=\"320\" cy=\"128\" r=\"4.5\"/><circle cx=\"320\" cy=\"160\" r=\"4.5\"/><circle cx=\"320\" cy=\"192\" r=\"4.5\"/><circle cx=\"320\" cy=\"224\" r=\"4.5\"/><circle cx=\"320\" cy=\"256\" r=\"4.5\"/><circle cx=\"320\" cy=\"288\" r=\"4.5\"/><circle cx=\"320\" cy=\"320\" r=\"4.5\"/><circle cx=\"320\" cy=\"352\" r=\"4.5\"/><circle cx=\"320\" cy=\"384\" r=\"4.5\"/><circle cx=\"320\" cy=\"416\" r=\"4.5\"/><circle cx=\"320\" cy=\"448\" r=\"4.5\"/><circle cx=\"320\" cy=\"480\" r=\"4.5\"/><circle cx=\"352\" cy=\"32\" r=\"4.5\"/><circle cx=\"352\" cy=\"64\" r=\"4.5\"/><circle cx=\"352\" cy=\"96\" r=\"4.5\"/><circle cx=\"352\" cy=\"128\" r=\"4.5\"/><circle cx=\"352\" cy=\"160\" r=\"4.5\"/><circle cx=\"352\" cy=\"192\" r=\"4.5\"/><circle cx=\"352\" cy=\"224\" r=\"4.5\"/><circle cx=\"352\" cy=\"256\" r=\"4.5\"/><circle cx=\"352\" cy=\"288\" r=\"4.5\"/><circle cx=\"352\" cy=\"320\" r=\"4.5\"/><circle cx=\"352\" cy=\"352\" r=\"4.5\"/><circle cx=\"352\" cy=\"384\" r=\"4.5\"/><circle cx=\"352\" cy=\"416\" r=\"4.5\"/><circle cx=\"352\" cy=\"448\" r=\"4.5\"/><circle cx=\"352\" cy=\"480\" r=\"4.5\"/><circle cx=\"384\" cy=\"32\" r=\"4.5\"/><circle cx=\"384\" cy=\"64\" r=\"4.5\"/><circle cx=\"384\" cy=\"96\" r=\"4.5\"/><circle cx=\"384\" cy=\"128\" r=\"4.5\"/><circle cx=\"384\" cy=\"160\" r=\"4.5\"/><circle cx=\"384\" cy=\"192\" r=\"4.5\"/><circle cx=\"384\" cy=\"224\" r=\"4.5\"/><circle cx=\"384\" cy=\"256\" r=\"4.5\"/><circle cx=\"384\" cy=\"288\" r=\"4.5\"/><circle cx=\"384\" cy=\"320\" r=\"4.5\"/><circle cx=\"384\" cy=\"352\" r=\"4.5\"/><circle cx=\"384\" cy=\"384\" r=\"4.5\"/><circle cx=\"384\" cy=\"416\" r=\"4.5\"/><circle cx=\"384\" cy=\"448\" r=\"4.5\"/><circle cx=\"384\" cy=\"480\" r=\"4.5\"/><circle cx=\"416\" cy=\"32\" r=\"4.5\"/><circle cx=\"416\" cy=\"64\" r=\"4.5\"/><circle cx=\"416\" cy=\"96\" r=\"4.5\"/><circle cx=\"416\" cy=\"128\" r=\"4.5\"/><circle cx=\"416\" cy=\"160\" r=\"4.5\"/><circle cx=\"416\" cy=\"192\" r=\"4.5\"/><circle cx=\"416\" cy=\"224\" r=\"4.5\"/><circle cx=\"416\" cy=\"256\" r=\"4.5\"/><circle cx=\"416\" cy=\"288\" r=\"4.5\"/><circle cx=\"416\" cy=\"320\" r=\"4.5\"/><circle cx=\"416\" cy=\"352\" r=\"4.5\"/><circle cx=\"416\" cy=\"384\" r=\"4.5\"/><circle cx=\"416\" cy=\"416\" r=\"4.5\"/><circle cx=\"416\" cy=\"448\" r=\"4.5\"/><circle cx=\"416\" cy=\"480\" r=\"4.5\"/><circle cx=\"448\" cy=\"32\" r=\"4.5\"/><circle cx=\"448\" cy=\"64\" r=\"4.5\"/><circle cx=\"448\" cy=\"96\" r=\"4.5\"/><circle cx=\"448\" cy=\"128\" r=\"4.5\"/><circle cx=\"448\" cy=\"160\" r=\"4.5\"/><circle cx=\"448\" cy=\"192\" r=\"4.5\"/><circle cx=\"448\" cy=\"224\" r=\"4.5\"/><circle cx=\"448\" cy=\"256\" r=\"4.5\"/><circle cx=\"448\" cy=\"288\" r=\"4.5\"/><circle cx=\"448\" cy=\"320\" r=\"4.5\"/><circle cx=\"448\" cy=\"352\" r=\"4.5\"/><circle cx=\"448\" cy=\"384\" r=\"4.5\"/><circle cx=\"448\" cy=\"416\" r=\"4.5\"/><circle cx=\"448\" cy=\"448\" r=\"4.5\"/><circle cx=\"448\" cy=\"480\" r=\"4.5\"/><circle cx=\"480\" cy=\"32\" r=\"4.5\"/><circle cx=\"480\" cy=\"64\" r=\"4.5\"/><circle cx=\"480\" cy=\"96\" r=\"4.5\"/><circle cx=\"480\" cy=\"128\" r=\"4.5\"/><circle cx=\"480\" cy=\"160\" r=\"4.5\"/><circle cx=\"480\" cy=\"192\" r=\"4.5\"/><circle cx=\"480\" cy=\"224\" r=\"4.5\"/><circle cx=\"480\" cy=\"256\" r=\"4.5\"/><circle cx=\"480\" cy=\"288\" r=\"4.5\"/><circle cx=\"480\" cy=\"320\" r=\"4.5\"/><circle cx=\"480\" cy=\"352\" r=\"4.5\"/><circle cx=\"480\" cy=\"384\" r=\"4.5\"/><circle cx=\"480\" cy=\"416\" r=\"4.5\"/><circle cx=\"480\" cy=\"448\" r=\"4.5\"/><circle cx=\"480\" cy=\"480\" r=\"4.5\"/></g>\n<g fill=\"none\" stroke=\"#e8eef2\" stroke-width=\"20\" stroke-linejoin=\"round\" stroke-linecap=\"round\">\n<path d=\"M112 238 V136 H400 V376 H112 V274\"/>\n<rect x=\"374\" y=\"196\" width=\"52\" height=\"120\" rx=\"3\" fill=\"#142230\"/>\n</g>\n<g stroke=\"#e8eef2\" stroke-width=\"20\" stroke-linecap=\"round\"><path d=\"M72 238 H152 M72 274 H152\"/></g>\n<g fill=\"#e8eef2\"><circle cx=\"400\" cy=\"136\" r=\"17\"/><circle cx=\"112\" cy=\"376\" r=\"17\"/></g>\n<path d=\"M296 176 L184 312 H250 L216 420 L338 270 H270 L312 176 Z\" fill=\"#f3c623\" stroke=\"#142230\" stroke-width=\"18\" stroke-linejoin=\"round\" paint-order=\"stroke\"/>\n</svg>";
+</script>
 <script>
 /* ===================== PocketSpice — moteur .op ===================== */
 const PS = (() => {
@@ -888,6 +925,11 @@ const STR = {
     'theme.auto': 'Auto', 'theme.light': 'Clair', 'theme.dark': 'Sombre',
     'menu.examples': 'Exemples', 'menu.circuit': 'Circuit', 'menu.new': 'Nouveau circuit', 'menu.newSub': 'Efface le schéma (annulable).',
     'menu.help': 'Aide', 'menu.helpSub': 'Gestes, conventions de signe et modèles.',
+    'menu.export': 'Exporter le circuit', 'menu.exportSub': 'Fichier .json à enregistrer ou à partager.',
+    'menu.import': 'Importer un circuit', 'menu.importSub': 'Ouvre un fichier exporté depuis PocketSpice.',
+    'toast.exported': 'Circuit exporté', 'toast.exportCopied': 'Export impossible ici : le circuit a été copié en texte.',
+    'toast.imported': 'Circuit importé', 'toast.importBad': 'Ce fichier n\'est pas un circuit PocketSpice valide.',
+    'toast.offline': 'PocketSpice fonctionne maintenant hors ligne.',
     'ex.0.t': 'Diviseur de tension', 'ex.0.d': '12 V, 1 kΩ et 2 kΩ en série.',
     'ex.1.t': 'LED et résistance série', 'ex.1.d': 'Calcul du courant dans une LED rouge sous 5 V.',
     'ex.2.t': 'Régulateur Zener', 'ex.2.d': 'Zener 5,1 V avec charge de 1 kΩ.',
@@ -931,8 +973,12 @@ M3 d g s s MN W=20u L=1u
       <p>Diode exponentielle (Is, n, tension Zener). Bipolaire Ebers-Moll (Is, β, tension d'Early). MOSFET quadratique de niveau 1 (Vth, β, λ), substrat relié à la source. Ce sont des modèles d'enseignement : ils ne remplacent pas les modèles constructeur complets de LTspice.</p>
       <h3 class="sec">Netlist</h3>
       <p>L'onglet Netlist montre le circuit en syntaxe SPICE. Tu peux la copier dans LTspice, ou coller une netlist simple (R, C, L, V, I, D, Q, M, E, G et .model) et la simuler ici. Une netlist collée s'affiche dans Résultats mais ne redessine pas le schéma.</p>
+      <h3 class="sec">Fichiers</h3>
+      <p>Menu → Exporter le circuit crée un fichier .json que tu peux enregistrer dans Fichiers ou envoyer. Menu → Importer un circuit l'ouvre à nouveau, sur n'importe quel appareil.</p>
       <h3 class="sec">Réglages</h3>
-      <p>Le thème (clair, sombre ou automatique) et la langue se changent depuis le menu.</p>`,
+      <p>Le thème (clair, sombre ou automatique) et la langue se changent depuis le menu.</p>
+      <h3 class="sec">App sur l'écran d'accueil</h3>
+      <p>Ajoutée à l'écran d'accueil, l'app s'ouvre en plein écran et fonctionne hors ligne après la première ouverture.</p>`,
   },
   en: {
     'tab.schema': 'Schematic', 'tab.netlist': 'Netlist', 'tab.results': 'Results', 'a.views': 'Views',
@@ -991,6 +1037,11 @@ M3 d g s s MN W=20u L=1u
     'theme.auto': 'Auto', 'theme.light': 'Light', 'theme.dark': 'Dark',
     'menu.examples': 'Examples', 'menu.circuit': 'Circuit', 'menu.new': 'New circuit', 'menu.newSub': 'Clears the schematic (can be undone).',
     'menu.help': 'Help', 'menu.helpSub': 'Gestures, sign conventions and models.',
+    'menu.export': 'Export circuit', 'menu.exportSub': 'A .json file to save or share.',
+    'menu.import': 'Import circuit', 'menu.importSub': 'Open a file exported from PocketSpice.',
+    'toast.exported': 'Circuit exported', 'toast.exportCopied': 'Export is not available here: the circuit was copied as text.',
+    'toast.imported': 'Circuit imported', 'toast.importBad': 'This file is not a valid PocketSpice circuit.',
+    'toast.offline': 'PocketSpice now works offline.',
     'ex.0.t': 'Voltage divider', 'ex.0.d': '12 V, 1 kΩ and 2 kΩ in series.',
     'ex.1.t': 'LED with series resistor', 'ex.1.d': 'Current through a red LED from a 5 V supply.',
     'ex.2.t': 'Zener regulator', 'ex.2.d': '5.1 V Zener with a 1 kΩ load.',
@@ -1034,8 +1085,12 @@ M3 d g s s MN W=20u L=1u
       <p>Exponential diode (Is, n, Zener voltage). Ebers-Moll bipolar transistor (Is, β, Early voltage). Level 1 square-law MOSFET (Vth, β, λ), with the bulk tied to the source. These are teaching models: they do not replace full manufacturer models.</p>
       <h3 class="sec">Netlist</h3>
       <p>The Netlist tab shows the circuit in SPICE syntax. You can copy it into another SPICE simulator, or paste a simple netlist (R, C, L, V, I, D, Q, M, E, G and .model) and simulate it here. A pasted netlist appears in Results but does not redraw the schematic.</p>
+      <h3 class="sec">Files</h3>
+      <p>Menu → Export circuit creates a .json file you can save to Files or send. Menu → Import circuit opens it again, on any device.</p>
       <h3 class="sec">Settings</h3>
-      <p>The theme (light, dark or automatic) and the language can be changed from the menu.</p>`,
+      <p>The theme (light, dark or automatic) and the language can be changed from the menu.</p>
+      <h3 class="sec">Home screen app</h3>
+      <p>Once added to the home screen, the app opens full screen and works offline after the first launch.</p>`,
   },
 };
 
@@ -2031,20 +2086,91 @@ M3 d g s s MN W=20u L=1u
       ${EXAMPLES.map((e, i) => `<button class="mitem" data-ex="${i}">${t('ex.' + i + '.t')}<small>${t('ex.' + i + '.d')}</small></button>`).join('')}
       <h3 class="sec">${t('menu.circuit')}</h3>
       <button class="mitem" data-a="new">${t('menu.new')}<small>${t('menu.newSub')}</small></button>
+      <button class="mitem" data-a="export">${t('menu.export')}<small>${t('menu.exportSub')}</small></button>
+      <button class="mitem" data-a="import">${t('menu.import')}<small>${t('menu.importSub')}</small></button>
       <button class="mitem" data-a="help">${t('menu.help')}<small>${t('menu.helpSub')}</small></button>`, keepScroll === true);
     document.querySelectorAll('[data-theme-set]').forEach((b) => { b.onclick = () => { prefs.theme = b.dataset.themeSet; savePrefs(); applyTheme(); openMenu(true); }; });
     document.querySelectorAll('[data-lang-set]').forEach((b) => { b.onclick = () => { prefs.lang = b.dataset.langSet; savePrefs(); applyLang(); openMenu(true); }; });
     document.querySelectorAll('[data-ex]').forEach((b) => { b.onclick = () => { closeModal(); loadExample(+b.dataset.ex, true); }; });
     $('[data-a="new"]').onclick = () => { closeModal(); pushUndo(); S.comps = []; S.wires = []; sel = null; results = null; edited(); renderSheet(); renderResults(); setTab('schema'); toast(t('toast.cleared')); };
     $('[data-a="help"]').onclick = openHelp;
+    $('[data-a="export"]').onclick = () => { closeModal(); exportCircuit(); };
+    $('[data-a="import"]').onclick = () => { closeModal(); const f = $('#importFile'); f.value = ''; f.click(); };
   }
+
+  /* ---------------- export / import ---------------- */
+  async function exportCircuit() {
+    const d = new Date(), p2 = (n) => String(n).padStart(2, '0');
+    const name = `pocketspice-${d.getFullYear()}-${p2(d.getMonth() + 1)}-${p2(d.getDate())}-${p2(d.getHours())}${p2(d.getMinutes())}.json`;
+    const data = { app: 'PocketSpice', format: 1, savedAt: d.toISOString(), comps: S.comps.map(({ id, ...c }) => c), wires: S.wires.map(({ id, ...w }) => w), netlist: genNetlist().text };
+    const json = JSON.stringify(data, null, 1);
+    let file = null;
+    try { file = new File([json], name, { type: 'application/json' }); } catch (_) { file = null; }
+    if (file && navigator.canShare && navigator.share) {
+      try {
+        if (navigator.canShare({ files: [file] })) { await navigator.share({ files: [file], title: name }); return; }
+      } catch (e) { if (e && e.name === 'AbortError') return; }
+    }
+    try {
+      const url = URL.createObjectURL(file || new Blob([json], { type: 'application/json' }));
+      const link = document.createElement('a');
+      link.href = url; link.download = name; document.body.appendChild(link); link.click(); link.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 5000);
+      toast(t('toast.exported'));
+    } catch (_) { copyText(json, t('toast.exportCopied')); }
+  }
+  function loadCircuitData(d) {
+    if (!d || typeof d !== 'object' || !Array.isArray(d.comps) || !Array.isArray(d.wires)) throw new Error('format');
+    const int = (v) => (typeof v === 'number' && isFinite(v) ? Math.round(v) : null);
+    const used = new Set(), comps = [];
+    for (const c of d.comps) {
+      if (!c || !PINS[c.type]) continue;
+      const x = int(c.x), y = int(c.y);
+      if (x === null || y === null) continue;
+      const props = JSON.parse(JSON.stringify(DEFAULT_PROPS[c.type]));
+      if (c.props && typeof c.props === 'object') for (const k of Object.keys(props)) if (c.props[k] !== undefined && c.props[k] !== null) props[k] = String(c.props[k]).slice(0, 40);
+      let name = '';
+      if (c.type !== 'GND' && c.type !== 'LBL') {
+        name = String(c.name || '').replace(/[\s;*=(),]+/g, '').slice(0, 24);
+        if (name && name[0].toUpperCase() !== c.type) name = c.type + name;
+        if (used.has(name.toLowerCase())) name = '';
+        if (name) used.add(name.toLowerCase());
+      }
+      comps.push({ id: nid(), type: c.type, x, y, rot: (((int(c.rot) || 0) % 4) + 4) % 4, mirror: !!c.mirror, name, props });
+    }
+    for (const c of comps) {
+      if (c.type === 'GND' || c.type === 'LBL' || c.name) continue;
+      let k = 1; while (used.has((c.type + k).toLowerCase())) k++;
+      c.name = c.type + k; used.add(c.name.toLowerCase());
+    }
+    const wires = d.wires.map((w) => ({ id: nid(), x1: int(w && w.x1), y1: int(w && w.y1), x2: int(w && w.x2), y2: int(w && w.y2) }))
+      .filter((w) => [w.x1, w.y1, w.x2, w.y2].every((v) => v !== null) && (w.x1 !== w.x2 || w.y1 !== w.y2));
+    if (!comps.length && !wires.length) throw new Error('empty');
+    pushUndo();
+    S.comps = comps; S.wires = wires; sel = null; results = null;
+    setTab('schema'); edited(); renderSheet(); renderResults(); fit();
+    if (netEl.value === lastGen || !netEl.value.trim()) syncNetlist(true);
+    toast(t('toast.imported'));
+  }
+  $('#importFile').addEventListener('change', (e) => {
+    const f = e.target.files && e.target.files[0];
+    if (!f) return;
+    const reader = new FileReader();
+    reader.onload = () => { try { loadCircuitData(JSON.parse(String(reader.result))); } catch (_) { toast(t('toast.importBad')); } };
+    reader.onerror = () => toast(t('toast.importBad'));
+    reader.readAsText(f);
+  });
   function openHelp() {
     openModal(`<div class="mh"><h2>${t('menu.help')}</h2>${closeBtn()}</div><div class="help">${t('help')}</div>`);
   }
+  const darkMQ = window.matchMedia ? matchMedia('(prefers-color-scheme: dark)') : null;
   function applyTheme() {
     if (prefs.theme === 'auto') document.documentElement.removeAttribute('data-theme');
     else document.documentElement.setAttribute('data-theme', prefs.theme);
+    const dark = prefs.theme === 'dark' || (prefs.theme === 'auto' && darkMQ && darkMQ.matches);
+    const m = document.getElementById('themeColor'); if (m) m.setAttribute('content', dark ? '#0e151b' : '#1c2a39');
   }
+  if (darkMQ && darkMQ.addEventListener) darkMQ.addEventListener('change', applyTheme);
   function applyLang() {
     PS.setLang(prefs.lang);
     document.documentElement.lang = prefs.lang;
@@ -2137,6 +2263,49 @@ M3 d g s s MN W=20u L=1u
   if (load()) { render(); renderResults(); requestAnimationFrame(fit); }
   else { loadExample(0, false); requestAnimationFrame(fit); }
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { _tw.clear(); schedule(); });
+  /* ---------------- app installée : démarrage, hors ligne ---------------- */
+  const standalone = document.documentElement.classList.contains('standalone');
+  const splash = document.getElementById('splash');
+  if (splash) {
+    if (standalone) requestAnimationFrame(() => setTimeout(() => { splash.classList.add('out'); setTimeout(() => splash.remove(), 450); }, 280));
+    else splash.remove();
+  }
+  function makeStartupImage() {
+    const ios = /iPhone|iPad|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+    if (!ios || standalone) return;
+    const dpr = window.devicePixelRatio || 1, w = Math.round(screen.width * dpr), h = Math.round(screen.height * dpr);
+    const img = new Image();
+    img.onload = () => {
+      try {
+        const cv = document.createElement('canvas'); cv.width = w; cv.height = h;
+        const g = cv.getContext('2d');
+        g.fillStyle = '#0e1822'; g.fillRect(0, 0, w, h);
+        const s = Math.round(Math.min(w, h) * 0.3), x = (w - s) / 2, y = h / 2 - s * 0.62, r = s * 0.22;
+        g.save(); g.beginPath();
+        g.moveTo(x + r, y); g.arcTo(x + s, y, x + s, y + s, r); g.arcTo(x + s, y + s, x, y + s, r); g.arcTo(x, y + s, x, y, r); g.arcTo(x, y, x + s, y, r); g.closePath(); g.clip();
+        g.drawImage(img, x, y, s, s); g.restore();
+        g.fillStyle = '#e8eef2'; g.textAlign = 'center'; g.textBaseline = 'top';
+        g.font = `600 ${Math.round(28 * dpr)}px "Barlow Condensed", -apple-system, system-ui, sans-serif`;
+        g.fillText('PocketSpice', w / 2, y + s + 22 * dpr);
+        const link = document.createElement('link');
+        link.rel = 'apple-touch-startup-image'; link.href = cv.toDataURL('image/png');
+        document.head.appendChild(link);
+      } catch (_) { /* image de démarrage facultative */ }
+    };
+    img.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(LOGO_SVG);
+  }
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(makeStartupImage); else makeStartupImage();
+  if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost')) {
+    window.addEventListener('load', () => {
+      const had = !!navigator.serviceWorker.controller;
+      navigator.serviceWorker.register('sw.js').then((reg) => {
+        if (had) return;
+        const w = reg.installing || reg.waiting;
+        if (w) w.addEventListener('statechange', () => { if (w.state === 'activated') toast(t('toast.offline')); });
+      }).catch(() => { /* hors ligne indisponible ici */ });
+    });
+  }
+
   window.__ps = { S: () => S, run: runSchematic, gen: genNetlist, loadExample, setTool, view };
 })();
 
