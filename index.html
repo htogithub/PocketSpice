@@ -194,57 +194,46 @@ h3.sec { margin: 22px 0 6px; font: 600 18px/1.2 var(--f-cond); }
 <body>
 <div id="app">
   <header class="top">
-    <div class="seg" role="tablist" aria-label="Vues">
-      <button role="tab" data-tab="schema" class="on">Schéma</button>
-      <button role="tab" data-tab="netlist">Netlist</button>
-      <button role="tab" data-tab="results">Résultats</button>
+    <div class="seg" role="tablist" data-i18n-aria="a.views">
+      <button role="tab" data-tab="schema" class="on" data-i18n="tab.schema">Schéma</button>
+      <button role="tab" data-tab="netlist" data-i18n="tab.netlist">Netlist</button>
+      <button role="tab" data-tab="results" data-i18n="tab.results">Résultats</button>
     </div>
-    <button class="iconbtn" id="menuBtn" aria-label="Menu">
+    <button class="iconbtn" id="menuBtn" data-i18n-aria="a.menu">
       <svg viewBox="0 0 24 24"><circle cx="5" cy="12" r="1.3" fill="currentColor"/><circle cx="12" cy="12" r="1.3" fill="currentColor"/><circle cx="19" cy="12" r="1.3" fill="currentColor"/></svg>
     </button>
   </header>
   <main>
     <section class="tab on" id="tab-schema">
       <div id="canvasWrap">
-        <svg id="svg" aria-label="Schéma du circuit"></svg>
+        <svg id="svg" data-i18n-aria="a.svg"></svg>
         <div class="ftools">
-          <button class="iconbtn" id="undoBtn" aria-label="Annuler"><svg viewBox="0 0 24 24"><path d="M9 14 4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 0 1 0 11H11"/></svg></button>
-          <button class="iconbtn" id="redoBtn" aria-label="Rétablir"><svg viewBox="0 0 24 24"><path d="m15 14 5-5-5-5"/><path d="M20 9H9.5a5.5 5.5 0 0 0 0 11H13"/></svg></button>
-          <button class="iconbtn" id="fitBtn" aria-label="Recadrer"><svg viewBox="0 0 24 24"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button>
-          <button class="iconbtn" id="tagBtn" aria-label="Afficher les valeurs sur le schéma" aria-pressed="true"><svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="m8 9.5 2 5 2-5M14 14.5h3"/></svg></button>
+          <button class="iconbtn" id="undoBtn" data-i18n-aria="a.undo"><svg viewBox="0 0 24 24"><path d="M9 14 4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 0 1 0 11H11"/></svg></button>
+          <button class="iconbtn" id="redoBtn" data-i18n-aria="a.redo"><svg viewBox="0 0 24 24"><path d="m15 14 5-5-5-5"/><path d="M20 9H9.5a5.5 5.5 0 0 0 0 11H13"/></svg></button>
+          <button class="iconbtn" id="fitBtn" data-i18n-aria="a.fit"><svg viewBox="0 0 24 24"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button>
+          <button class="iconbtn" id="tagBtn" data-i18n-aria="a.tags" aria-pressed="true"><svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="m8 9.5 2 5 2-5M14 14.5h3"/></svg></button>
+          <button class="iconbtn" id="rotBtn" data-i18n-aria="a.rotate" hidden><svg viewBox="0 0 24 24"><path d="M20 11a8 8 0 1 0-2.3 5.7"/><path d="M20 4v7h-7"/></svg></button>
         </div>
         <div id="banner" class="banner" hidden></div>
         <div id="hint" hidden></div>
-        <button id="run" aria-label="Lancer la simulation"><svg viewBox="0 0 24 24"><path d="M7 4.5v15a1 1 0 0 0 1.5.86l12.5-7.5a1 1 0 0 0 0-1.72L8.5 3.64A1 1 0 0 0 7 4.5Z"/></svg>Run</button>
+        <button id="run" data-i18n-aria="a.run"><svg viewBox="0 0 24 24"><path d="M7 4.5v15a1 1 0 0 0 1.5.86l12.5-7.5a1 1 0 0 0 0-1.72L8.5 3.64A1 1 0 0 0 7 4.5Z"/></svg>Run</button>
         <div id="sheet" hidden></div>
       </div>
-      <nav class="tools" id="tools" aria-label="Outils"></nav>
+      <nav class="tools" id="tools" data-i18n-aria="a.tools"></nav>
     </section>
     <section class="tab" id="tab-netlist">
       <div class="net-wrap">
         <div class="net-actions">
-          <button class="btn" id="netFrom" aria-label="Régénérer la netlist depuis le schéma">Régénérer</button>
-          <button class="btn sm" id="netCopy">Copier</button>
-          <button class="btn primary" id="netRun">Simuler</button>
+          <button class="btn" id="netFrom" data-i18n="net.from" data-i18n-aria="a.netFrom">Régénérer</button>
+          <button class="btn sm" id="netCopy" data-i18n="net.copy">Copier</button>
+          <button class="btn primary" id="netRun" data-i18n="net.run">Simuler</button>
         </div>
         <div id="netMsg" hidden></div>
-        <textarea id="net" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off" aria-label="Netlist SPICE"></textarea>
+        <textarea id="net" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off" data-i18n-aria="a.net"></textarea>
         <details class="syntax">
-          <summary>Syntaxe acceptée</summary>
-<pre>* commentaire          ; commentaire en fin de ligne
-R1 in out 4.7k        C1 a 0 100n        L1 a b 10u
-V1 in 0 12            V2 a b DC 5        I1 0 a 1m
-D1 anode cathode D    (modèles : D, 1N4148, LED, ZENER)
-Q1 c b e NPN          Q2 c b e PNP
-M1 d g s NMOS         M2 d g s PMOS
-E1 out 0 inp inn 1e5  (source de tension commandée)
-G1 out 0 inp inn 1m   (source de courant commandée)
-.model DZ D(Is=1e-14 N=1 BV=6.2)
-.model Q2N3904 NPN(Is=6.7f Bf=416 Vaf=74)
-.model MN NMOS(Vto=0.7 Kp=100u Lambda=0.02)
-M3 d g s s MN W=20u L=1u
-.op</pre>
-          <p>Suffixes : f p n u m k meg g. Comme dans LTspice, m = milli et meg = méga. Les analyses .tran, .ac et .dc sont ignorées : seul le point de fonctionnement est calculé.</p>
+          <summary data-i18n="net.syntax">Syntaxe acceptée</summary>
+<pre id="syntaxPre"></pre>
+          <p id="syntaxNote"></p>
         </details>
       </div>
     </section>
@@ -259,6 +248,45 @@ M3 d g s s MN W=20u L=1u
 /* ===================== PocketSpice — moteur .op ===================== */
 const PS = (() => {
   const VT = 0.025865;      // kT/q à 27 °C
+  let LANG = 'fr';
+  const MSG = {
+    fr: {
+      noValue: 'aucune valeur, 0 utilisé', acOnly: 'source AC seule : 0 V en DC', srcT0: 'source {k} : valeur à t = 0 utilisée',
+      badModel: 'Ligne {ln} : .model illisible', modelType: 'Ligne {ln} : type de modèle « {t} » non pris en charge',
+      ignored: 'Ligne {ln} : {c} ignorée (seule l\'analyse .op est disponible)', badCmd: 'Ligne {ln} : commande {c} non prise en charge',
+      incomplete: 'Ligne {ln} : {n} incomplet', badValue: 'Ligne {ln} : valeur « {v} » invalide pour {n}', zeroR: '{n} : résistance nulle, utilise un fil à la place',
+      badSrc: 'Ligne {ln} : valeur de {n} illisible', warnOf: '{n} : {w}', noDiode: 'Ligne {ln} : modèle de diode « {m} » introuvable',
+      diodePos: '{n} : Is et n doivent être positifs', noBjt: 'Ligne {ln} : modèle de transistor « {m} » introuvable', bjtPos: '{n} : Is, BF et BR doivent être positifs',
+      bulk: '{n} : substrat relié à la source (modèle 3 broches)', noMos: 'Ligne {ln} : modèle de MOSFET « {m} » introuvable', kpPos: '{n} : Kp doit être positif',
+      badGain: 'Ligne {ln} : gain de {n} illisible', badEl: 'Ligne {ln} : élément « {n} » non pris en charge', dup: 'Nom en double : {n}',
+      empty: 'Le circuit est vide.', noGround: 'Aucune masse : relie le circuit au nœud 0 (symbole masse).',
+      shorted: '{n} a ses deux bornes sur le même nœud (court-circuit).',
+      loop: 'Boucle de sources de tension ou de bobines passant par {n}. En DC, une bobine est un court-circuit : ajoute une résistance dans la boucle.',
+      floating: 'Pas de chemin DC vers la masse pour : {l}. Ces tensions sont fixées artificiellement (GMIN).',
+      singular: 'Matrice singulière : le circuit n\'a pas de solution unique. Vérifie les sources de tension en parallèle et les sources commandées.',
+      noConv: 'La simulation n\'a pas convergé. Vérifie les valeurs (sources très grandes, résistances nulles ou négatives, boucles de rétroaction).',
+      mNewton: 'Newton', mGmin: 'pas de GMIN', mSrc: 'montée des sources',
+    },
+    en: {
+      noValue: 'no value, 0 used', acOnly: 'AC-only source: 0 V in DC', srcT0: '{k} source: value at t = 0 used',
+      badModel: 'Line {ln}: unreadable .model', modelType: 'Line {ln}: model type "{t}" not supported',
+      ignored: 'Line {ln}: {c} ignored (only the .op analysis is available)', badCmd: 'Line {ln}: command {c} not supported',
+      incomplete: 'Line {ln}: {n} is incomplete', badValue: 'Line {ln}: invalid value "{v}" for {n}', zeroR: '{n}: zero resistance, use a wire instead',
+      badSrc: 'Line {ln}: unreadable value for {n}', warnOf: '{n}: {w}', noDiode: 'Line {ln}: diode model "{m}" not found',
+      diodePos: '{n}: Is and n must be positive', noBjt: 'Line {ln}: transistor model "{m}" not found', bjtPos: '{n}: Is, BF and BR must be positive',
+      bulk: '{n}: bulk tied to source (3-terminal model)', noMos: 'Line {ln}: MOSFET model "{m}" not found', kpPos: '{n}: Kp must be positive',
+      badGain: 'Line {ln}: unreadable gain for {n}', badEl: 'Line {ln}: element "{n}" not supported', dup: 'Duplicate name: {n}',
+      empty: 'The circuit is empty.', noGround: 'No ground: connect the circuit to node 0 (ground symbol).',
+      shorted: '{n} has both terminals on the same node (short circuit).',
+      loop: 'Loop of voltage sources or inductors through {n}. In DC, an inductor is a short circuit: add a resistor in the loop.',
+      floating: 'No DC path to ground for: {l}. These voltages are set artificially (GMIN).',
+      singular: 'Singular matrix: the circuit has no unique solution. Check for parallel voltage sources and controlled sources.',
+      noConv: 'The simulation did not converge. Check the values (very large sources, zero or negative resistances, feedback loops).',
+      mNewton: 'Newton', mGmin: 'GMIN stepping', mSrc: 'source stepping',
+    },
+  };
+  const M = (k, v = {}) => (MSG[LANG][k] || MSG.fr[k]).replace(/\{(\w+)\}/g, (_, x) => (v[x] ?? ''));
+  const setLang = (l) => { if (MSG[l]) LANG = l; };
   const GMIN = 1e-12;
   const SUF = { f: 1e-15, p: 1e-12, n: 1e-9, u: 1e-6, 'µ': 1e-6, 'μ': 1e-6, m: 1e-3, k: 1e3, meg: 1e6, g: 1e9, t: 1e12 };
 
@@ -333,17 +361,17 @@ const PS = (() => {
   /* ---------------- netlist ---------------- */
   function sourceValue(rest) {
     const s = rest.trim();
-    if (!s) return { v: 0, warn: 'aucune valeur, 0 utilisé' };
+    if (!s) return { v: 0, warn: M('noValue') };
     let m = s.match(/\bdc\s*=?\s*([^\s()]+)/i);
     if (m) return { v: parseValue(m[1]) };
-    if (/^ac\b/i.test(s)) return { v: 0, warn: 'source AC seule : 0 V en DC' };
+    if (/^ac\b/i.test(s)) return { v: 0, warn: M('acOnly') };
     m = s.match(/^([^\s()]+)/);
     if (m && !isNaN(parseValue(m[1]))) return { v: parseValue(m[1]) };
     m = s.match(/^(sine?|pulse|exp|sffm|pwl)\s*\(\s*([^\s,)]+)(?:[\s,]+([^\s,)]+))?/i);
     if (m) {
       const kind = m[1].toLowerCase();
       const v = kind === 'pwl' ? parseValue(m[3]) : parseValue(m[2]);
-      return { v, warn: `source ${kind.toUpperCase()} : valeur à t = 0 utilisée` };
+      return { v, warn: M('srcT0', { k: kind.toUpperCase() }) };
     }
     return { v: NaN };
   }
@@ -362,9 +390,9 @@ const PS = (() => {
     for (const L of lines) {
       if (!/^\.model\b/i.test(L.text)) continue;
       const m = L.text.match(/^\.model\s+(\S+)\s+([a-z]+)\s*(.*)$/i);
-      if (!m) { errors.push(`Ligne ${L.ln} : .model illisible`); continue; }
+      if (!m) { errors.push(M('badModel', { ln: L.ln })); continue; }
       const type = m[2].toUpperCase();
-      if (!DEFAULTS[type]) { errors.push(`Ligne ${L.ln} : type de modèle « ${m[2]} » non pris en charge`); continue; }
+      if (!DEFAULTS[type]) { errors.push(M('modelType', { ln: L.ln, t: m[2] })); continue; }
       models[m[1].toLowerCase()] = applyParams({ type, ...DEFAULTS[type] }, parseParams(m[3]));
     }
     const lookup = (name) => {
@@ -378,37 +406,37 @@ const PS = (() => {
       if (t[0] === '.') {
         const cmd = t.split(/\s+/)[0].toLowerCase();
         if (['.model', '.op', '.end', '.backanno', '.title'].includes(cmd)) continue;
-        if (IGN.includes(cmd)) { warnings.push(`Ligne ${ln} : ${cmd} ignorée (seule l'analyse .op est disponible)`); continue; }
-        errors.push(`Ligne ${ln} : commande ${cmd} non prise en charge`); continue;
+        if (IGN.includes(cmd)) { warnings.push(M('ignored', { ln, c: cmd })); continue; }
+        errors.push(M('badCmd', { ln, c: cmd })); continue;
       }
       const T = t.split(/\s+/);
       const nm = T[0], k = nm[0].toUpperCase();
-      const need = (n) => { if (T.length < n) { errors.push(`Ligne ${ln} : ${nm} incomplet`); return false; } return true; };
+      const need = (n) => { if (T.length < n) { errors.push(M('incomplete', { ln, n: nm })); return false; } return true; };
       const inline = (from) => parseParams(T.slice(from).join(' '));
       switch (k) {
         case 'R': case 'C': case 'L': {
           if (!need(4)) break;
           let vs = T[3]; if (vs.includes('=')) vs = vs.split('=')[1];
           const v = parseValue(vs);
-          if (isNaN(v)) { errors.push(`Ligne ${ln} : valeur « ${T[3]} » invalide pour ${nm}`); break; }
-          if (k === 'R' && v === 0) { errors.push(`${nm} : résistance nulle, utilise un fil à la place`); break; }
+          if (isNaN(v)) { errors.push(M('badValue', { ln, v: T[3], n: nm })); break; }
+          if (k === 'R' && v === 0) { errors.push(M('zeroR', { n: nm })); break; }
           elements.push({ name: nm, type: k, nodes: [T[1], T[2]], p: { value: v }, ln });
           break;
         }
         case 'V': case 'I': {
           if (!need(3)) break;
           const r = sourceValue(T.slice(3).join(' '));
-          if (isNaN(r.v)) { errors.push(`Ligne ${ln} : valeur de ${nm} illisible`); break; }
-          if (r.warn) warnings.push(`${nm} : ${r.warn}`);
+          if (isNaN(r.v)) { errors.push(M('badSrc', { ln, n: nm })); break; }
+          if (r.warn) warnings.push(M('warnOf', { n: nm, w: r.warn }));
           elements.push({ name: nm, type: k, nodes: [T[1], T[2]], p: { value: r.v }, ln });
           break;
         }
         case 'D': {
           if (!need(3)) break;
           const md = lookup(T[3] || 'D');
-          if (!md || md.type !== 'D') { errors.push(`Ligne ${ln} : modèle de diode « ${T[3]} » introuvable`); break; }
+          if (!md || md.type !== 'D') { errors.push(M('noDiode', { ln, m: T[3] })); break; }
           applyParams(md, inline(4));
-          if (!(md.is > 0 && md.n > 0)) { errors.push(`${nm} : Is et n doivent être positifs`); break; }
+          if (!(md.is > 0 && md.n > 0)) { errors.push(M('diodePos', { n: nm })); break; }
           const nvt = md.n * VT;
           md.vcrit = nvt * Math.log(nvt / (Math.SQRT2 * md.is));
           elements.push({ name: nm, type: 'D', nodes: [T[1], T[2]], p: md, ln });
@@ -418,9 +446,9 @@ const PS = (() => {
           if (!need(5)) break;
           let md = lookup(T[4]), from = 5;
           if (!md && T[5]) { md = lookup(T[5]); from = 6; }
-          if (!md || (md.type !== 'NPN' && md.type !== 'PNP')) { errors.push(`Ligne ${ln} : modèle de transistor « ${T[4]} » introuvable`); break; }
+          if (!md || (md.type !== 'NPN' && md.type !== 'PNP')) { errors.push(M('noBjt', { ln, m: T[4] })); break; }
           applyParams(md, inline(from));
-          if (!(md.is > 0 && md.bf > 0 && md.br > 0)) { errors.push(`${nm} : Is, BF et BR doivent être positifs`); break; }
+          if (!(md.is > 0 && md.bf > 0 && md.br > 0)) { errors.push(M('bjtPos', { n: nm })); break; }
           md.pol = md.type === 'NPN' ? 1 : -1;
           md.vcrit = VT * Math.log(VT / (Math.SQRT2 * md.is));
           elements.push({ name: nm, type: 'Q', nodes: [T[1], T[2], T[3]], p: md, ln });
@@ -431,33 +459,33 @@ const PS = (() => {
           let md = lookup(T[4]), from = 5;
           if (!md && T[5]) {
             md = lookup(T[5]); from = 6;
-            if (md && T[4].toLowerCase() !== T[3].toLowerCase()) warnings.push(`${nm} : substrat relié à la source (modèle 3 broches)`);
+            if (md && T[4].toLowerCase() !== T[3].toLowerCase()) warnings.push(M('bulk', { n: nm }));
           }
-          if (!md || (md.type !== 'NMOS' && md.type !== 'PMOS')) { errors.push(`Ligne ${ln} : modèle de MOSFET « ${T[4]} » introuvable`); break; }
+          if (!md || (md.type !== 'NMOS' && md.type !== 'PMOS')) { errors.push(M('noMos', { ln, m: T[4] })); break; }
           const ip = inline(from);
           applyParams(md, ip);
           const W = ip.w !== undefined ? parseValue(ip.w) : 1, Ln = ip.l !== undefined ? parseValue(ip.l) : 1;
           const ratio = (W > 0 && Ln > 0) ? W / Ln : 1;
           const p = { pol: md.type === 'NMOS' ? 1 : -1, vth: Math.abs(md.vto), kp: md.kp * ratio, lambda: md.lambda, type: md.type };
-          if (!(p.kp > 0)) { errors.push(`${nm} : Kp doit être positif`); break; }
+          if (!(p.kp > 0)) { errors.push(M('kpPos', { n: nm })); break; }
           elements.push({ name: nm, type: 'M', nodes: [T[1], T[2], T[3]], p, ln });
           break;
         }
         case 'E': case 'G': {
           if (!need(6)) break;
           const v = parseValue(T[5]);
-          if (isNaN(v)) { errors.push(`Ligne ${ln} : gain de ${nm} illisible`); break; }
+          if (isNaN(v)) { errors.push(M('badGain', { ln, n: nm })); break; }
           elements.push({ name: nm, type: k, nodes: [T[1], T[2], T[3], T[4]], p: { value: v }, ln });
           break;
         }
         default:
-          errors.push(`Ligne ${ln} : élément « ${nm} » non pris en charge`);
+          errors.push(M('badEl', { ln, n: nm }));
       }
     }
     const seen = new Set();
     for (const e of elements) {
       const key = e.name.toLowerCase();
-      if (seen.has(key)) errors.push(`Nom en double : ${e.name}`);
+      if (seen.has(key)) errors.push(M('dup', { n: e.name }));
       seen.add(key);
     }
     return { elements, warnings, errors };
@@ -565,7 +593,7 @@ const PS = (() => {
 
   /* ---------------- simulation .op ---------------- */
   function simulate(elements) {
-    if (!elements.length) return { ok: false, error: 'Le circuit est vide.' };
+    if (!elements.length) return { ok: false, error: M('empty') };
     const idx = new Map(), names = ['0'];
     const ni = (nm) => {
       const key = String(nm).toLowerCase();
@@ -580,15 +608,15 @@ const PS = (() => {
     const size = N + nb;
     const warnings = [];
 
-    if (!els.some((e) => e.n.includes(0))) return { ok: false, error: 'Aucune masse : relie le circuit au nœud 0 (symbole masse).' };
+    if (!els.some((e) => e.n.includes(0))) return { ok: false, error: M('noGround') };
 
     // boucles de sources de tension / bobines
     const uf = makeUF(N + 1);
     for (const e of els) {
       if (e.type !== 'V' && e.type !== 'L' && e.type !== 'E') continue;
-      if (e.n[0] === e.n[1]) return { ok: false, error: `${e.name} a ses deux bornes sur le même nœud (court-circuit).` };
+      if (e.n[0] === e.n[1]) return { ok: false, error: M('shorted', { n: e.name }) };
       if (!uf.union(e.n[0], e.n[1])) {
-        return { ok: false, error: `Boucle de sources de tension ou de bobines passant par ${e.name}. En DC, une bobine est un court-circuit : ajoute une résistance dans la boucle.` };
+        return { ok: false, error: M('loop', { n: e.name }) };
       }
     }
     // chemins DC vers la masse
@@ -604,7 +632,7 @@ const PS = (() => {
     for (let i = 1; i <= N; i++) if (dc.find(i) !== dc.find(0)) floating.push(names[i]);
     const floatSet = new Set();
     for (let i = 1; i <= N; i++) if (dc.find(i) !== dc.find(0)) floatSet.add(i);
-    if (floating.length) warnings.push(`Pas de chemin DC vers la masse pour : ${floating.join(', ')}. Ces tensions sont fixées artificiellement (GMIN).`);
+    if (floating.length) warnings.push(M('floating', { l: floating.join(', ') }));
 
     const nl = els.filter((e) => e.type === 'D' || e.type === 'Q' || e.type === 'M');
     const resetStates = () => {
@@ -716,7 +744,7 @@ const PS = (() => {
 
     const zeros = new Float64Array(size);
     resetStates();
-    let res = newton(zeros, 1, 0, 150, true), method = 'Newton';
+    let res = newton(zeros, 1, 0, 150, true), method = M('mNewton');
     if (!res.ok && !res.singular) {
       // pas de GMIN
       resetStates();
@@ -726,7 +754,7 @@ const PS = (() => {
         if (!r.ok) { ok = false; break; }
         x = r.x; its += r.it;
       }
-      if (ok) { res = { ok: true, x, it: its }; method = 'pas de GMIN'; }
+      if (ok) { res = { ok: true, x, it: its }; method = M('mGmin'); }
     }
     if (!res.ok && !res.singular) {
       // montée progressive des sources
@@ -740,11 +768,11 @@ const PS = (() => {
           if (r2.ok) { x = r2.x; f = fn; its += r2.it; step = Math.min(step * 1.5, 0.25); }
           else { restoreStates(saved); step /= 4; if (step < 1e-6) { ok = false; break; } }
         }
-        if (ok) { res = { ok: true, x, it: its }; method = 'montée des sources'; }
+        if (ok) { res = { ok: true, x, it: its }; method = M('mSrc'); }
       }
     }
-    if (res.singular) return { ok: false, error: 'Matrice singulière : le circuit n\'a pas de solution unique. Vérifie les sources de tension en parallèle et les sources commandées.' };
-    if (!res.ok) return { ok: false, error: 'La simulation n\'a pas convergé. Vérifie les valeurs (sources très grandes, résistances nulles ou négatives, boucles de rétroaction).' };
+    if (res.singular) return { ok: false, error: M('singular') };
+    if (!res.ok) return { ok: false, error: M('noConv') };
 
     const x = res.x;
     const nodeV = {};
@@ -795,9 +823,221 @@ const PS = (() => {
     return r;
   }
 
-  return { parseValue, fmt, spiceNum, parseNetlist, simulate, run, VT };
+  return { parseValue, fmt, spiceNum, parseNetlist, simulate, run, VT, setLang };
 })();
 if (typeof module !== 'undefined') module.exports = PS;
+
+</script>
+<script>
+/* ===================== PocketSpice — textes FR / EN ===================== */
+const STR = {
+  fr: {
+    'tab.schema': 'Schéma', 'tab.netlist': 'Netlist', 'tab.results': 'Résultats', 'a.views': 'Vues',
+    'a.menu': 'Menu', 'a.undo': 'Annuler', 'a.redo': 'Rétablir', 'a.fit': 'Recadrer', 'a.tags': 'Afficher les valeurs sur le schéma',
+    'a.rotate': 'Pivoter le composant sélectionné', 'a.run': 'Lancer la simulation', 'a.svg': 'Schéma du circuit', 'a.tools': 'Outils',
+    'a.close': 'Fermer', 'a.closeSheet': 'Fermer la fiche', 'a.net': 'Netlist SPICE', 'a.netFrom': 'Régénérer la netlist depuis le schéma',
+    'net.from': 'Régénérer', 'net.copy': 'Copier', 'net.run': 'Simuler', 'net.syntax': 'Syntaxe acceptée',
+    'type.R': 'Résistance', 'type.C': 'Condensateur', 'type.L': 'Bobine', 'type.V': 'Source de tension', 'type.I': 'Source de courant',
+    'type.D': 'Diode', 'type.Q': 'Transistor bipolaire', 'type.M': 'MOSFET', 'type.GND': 'Masse', 'type.LBL': 'Nom de nœud',
+    'type.E': 'Source commandée (tension)', 'type.G': 'Source commandée (courant)',
+    'tool.select': 'Sélection', 'tool.wire': 'Fil', 'tool.R': 'R', 'tool.C': 'C', 'tool.L': 'L', 'tool.V': 'Source V', 'tool.I': 'Source I',
+    'tool.D': 'Diode', 'tool.Q': 'Bipolaire', 'tool.M': 'MOSFET', 'tool.GND': 'Masse', 'tool.LBL': 'Nœud',
+    'pin.from': 'de', 'pin.to': 'vers',
+    'f.name': 'Nom', 'f.nameHint': 'commence par {p}', 'f.node': 'Nom du nœud', 'f.nodeHint': 'vide = nom automatique',
+    'f.R': 'Résistance', 'f.C': 'Capacité', 'f.L': 'Inductance', 'f.V': 'Tension', 'f.I': 'Courant',
+    'f.type': 'Type', 'f.bv': 'Tension Zener', 'f.is': 'Is (saturation)', 'f.n': 'n (idéalité)', 'f.bf': 'Gain β', 'f.vaf': 'VAF (Early)',
+    'f.vth': '|Vth| (seuil)', 'f.beta': 'β = Kp·W/L', 'f.lambda': 'λ (modulation)',
+    'opt.std': 'Standard', 'opt.sig': '1N4148', 'opt.led': 'LED rouge', 'opt.zener': 'Zener',
+    'pv.bad': 'valeur illisible', 'pv.inf': '= ∞ (désactivé)',
+    'note.C': 'En DC, un condensateur se comporte comme un circuit ouvert.',
+    'note.L': 'En DC, une bobine se comporte comme un court-circuit.',
+    'note.V': 'La borne + est marquée sur le symbole.',
+    'note.I': 'Le courant sort par la pointe de la flèche.',
+    'note.D': 'Modèle exponentiel I = Is·(exp(V/(n·VT)) − 1), VT = 25,9 mV.',
+    'note.Q': 'Modèle Ebers-Moll. VAF = 0 désactive l\'effet Early.',
+    'note.M': 'En saturation : ID = β/2·(VGS − Vth)²·(1 + λ·VDS). Le substrat est relié à la source.',
+    'note.GND': 'Référence 0 V du circuit.',
+    'note.LBL': 'Deux noms identiques sont reliés entre eux. « 0 » ou « gnd » désigne la masse.',
+    'wire.title': 'Fil', 'wire.ground': 'Ce fil est relié à la masse.', 'wire.none': 'Ce fil n\'est relié à aucun composant.',
+    'btn.rotate': 'Pivoter', 'btn.mirror': 'Miroir', 'btn.delete': 'Supprimer', 'btn.deleteWire': 'Supprimer le fil', 'btn.copy': 'Copier',
+    'toast.nameUsed': 'Le nom {v} est déjà utilisé.', 'toast.merged': 'Le nœud {v} existait déjà : les deux nœuds sont maintenant reliés.',
+    'toast.copied': 'Résultats copiés', 'toast.netCopied': 'Netlist copiée', 'toast.noCopy': 'Copie impossible ici : sélectionne le texte à la main.',
+    'toast.netFrom': 'Netlist régénérée depuis le schéma', 'toast.cleared': 'Schéma effacé. Annuler pour le récupérer.', 'toast.example': 'Exemple chargé : {t}',
+    'hint.wire': 'Glisse d\'un point à un autre pour tracer un fil. Deux doigts pour déplacer la vue.',
+    'hint.place': 'Touche la feuille pour placer : {t}.',
+    'gen.header': '* PocketSpice, netlist générée depuis le schéma',
+    'gen.invalid': '{n} : {label} invalide (« {v} »)', 'gen.zeroR': '{n} : résistance nulle, utilise un fil à la place',
+    'gen.empty': 'Le schéma est vide : place des composants depuis la barre du bas.',
+    'gen.noGround': 'Aucune masse : ajoute le symbole Masse pour fixer la référence 0 V.',
+    'gen.pin': 'Broche non connectée sur {c} (nœud {n}).',
+    'lbl.resistance': 'résistance', 'lbl.value': 'valeur', 'lbl.bv': 'tension Zener',
+    'run.fail': 'Simulation impossible', 'run.warn1': '1 avertissement', 'run.warnN': '{n} avertissements',
+    'dl.ground': 'masse', 'dl.current': 'Courant', 'dl.dir': 'Sens', 'dl.voltage': 'Tension', 'dl.pdiss': 'Puissance dissipée',
+    'dl.lShort': '0 V (court-circuit en DC)', 'dl.posTerm': 'Borne positive', 'dl.cOpen': '0 A (circuit ouvert en DC)',
+    'dl.supplied': 'Courant fourni (sort par +)', 'dl.psup': 'Puissance fournie', 'dl.vba': 'Tension V({b}) − V({a})',
+    'dl.fwd': ' (direct)', 'dl.rev': ' (inverse)', 'dl.vak': 'Tension VAK', 'dl.power': 'Puissance', 'dl.region': 'Régime',
+    'reg.off': 'Bloqué', 'reg.active': 'Actif (direct)', 'reg.sat': 'Saturé', 'reg.reverse': 'Actif inverse',
+    'reg.m.off': 'Bloqué', 'reg.m.triode': 'Ohmique (triode)', 'reg.m.sat': 'Saturation',
+    'dl.icIn': 'IC (entrant)', 'dl.icOut': 'IC (sortant)', 'dl.ibIn': 'IB (entrant)', 'dl.ibOut': 'IB (sortant)', 'dl.ieOut': 'IE (sortant)', 'dl.ieIn': 'IE (entrant)',
+    'dl.idIn': 'ID (entrant au drain)', 'dl.idOut': 'ID (sortant du drain)',
+    'res.emptyT': 'Pas encore de résultats', 'res.emptyP': 'Dessine un circuit et appuie sur Run, ou simule une netlist depuis l\'onglet Netlist.',
+    'res.title': 'Point de fonctionnement', 'res.subS': 'Calculé depuis le schéma en {n} itérations ({m}).', 'res.subN': 'Calculé depuis la netlist en {n} itérations ({m}).',
+    'res.nodes': 'Tensions aux nœuds', 'res.noNodes': 'Aucun nœud en dehors de la masse.', 'res.comps': 'Composants',
+    'res.between': 'Entre {a} et {b}', 'res.fromTo': 'De {a} vers {b}', 'res.copyHead': 'PocketSpice, point de fonctionnement (.op)',
+    'menu.sub': 'Simulateur de circuits : point de fonctionnement DC (.op).', 'menu.settings': 'Réglages', 'menu.theme': 'Thème', 'menu.lang': 'Langue',
+    'theme.auto': 'Auto', 'theme.light': 'Clair', 'theme.dark': 'Sombre',
+    'menu.examples': 'Exemples', 'menu.circuit': 'Circuit', 'menu.new': 'Nouveau circuit', 'menu.newSub': 'Efface le schéma (annulable).',
+    'menu.help': 'Aide', 'menu.helpSub': 'Gestes, conventions de signe et modèles.',
+    'ex.0.t': 'Diviseur de tension', 'ex.0.d': '12 V, 1 kΩ et 2 kΩ en série.',
+    'ex.1.t': 'LED et résistance série', 'ex.1.d': 'Calcul du courant dans une LED rouge sous 5 V.',
+    'ex.2.t': 'Régulateur Zener', 'ex.2.d': 'Zener 5,1 V avec charge de 1 kΩ.',
+    'ex.3.t': 'Bipolaire en émetteur commun', 'ex.3.d': 'Polarisation par pont de base, NPN β = 100.',
+    'ex.4.t': 'MOSFET en source commune', 'ex.4.d': 'NMOS polarisé par une tension de grille de 2,5 V.',
+    syntaxNote: 'Suffixes : f p n u m k meg g. Comme dans LTspice, m = milli et meg = méga. Les analyses .tran, .ac et .dc sont ignorées : seul le point de fonctionnement est calculé.',
+    syntax: `* commentaire          ; commentaire en fin de ligne
+R1 in out 4.7k        C1 a 0 100n        L1 a b 10u
+V1 in 0 12            V2 a b DC 5        I1 0 a 1m
+D1 anode cathode D    (modèles : D, 1N4148, LED, ZENER)
+Q1 c b e NPN          Q2 c b e PNP
+M1 d g s NMOS         M2 d g s PMOS
+E1 out 0 inp inn 1e5  (source de tension commandée)
+G1 out 0 inp inn 1m   (source de courant commandée)
+.model DZ D(Is=1e-14 N=1 BV=6.2)
+.model Q2N3904 NPN(Is=6.7f Bf=416 Vaf=74)
+.model MN NMOS(Vto=0.7 Kp=100u Lambda=0.02)
+M3 d g s s MN W=20u L=1u
+.op`,
+    help: `<h3 class="sec">Dessiner</h3>
+      <ul>
+        <li><b>Placer</b> : choisis un composant dans la barre du bas, puis touche la feuille.</li>
+        <li><b>Relier</b> : outil Fil, puis glisse d'une borne à l'autre. Un fil qui arrive sur une borne ou sur un autre fil s'y connecte ; un point noir marque chaque connexion. Deux fils qui se croisent sans point ne sont pas reliés.</li>
+        <li><b>Modifier</b> : touche un composant pour changer sa valeur, le pivoter ou le supprimer. Glisse-le pour le déplacer : les fils suivent. Le bouton de rotation apparaît aussi à droite de la feuille quand un composant est sélectionné.</li>
+        <li><b>Renommer</b> : touche un composant et modifie son champ Nom. Touche un fil pour donner un nom à son nœud.</li>
+        <li><b>Vue</b> : glisse sur la feuille pour te déplacer, pince à deux doigts pour zoomer.</li>
+        <li>Les petits cercles vides signalent une borne ou un fil non connecté.</li>
+      </ul>
+      <h3 class="sec">Simuler</h3>
+      <ul>
+        <li>Run calcule le point de fonctionnement DC, comme <code>.op</code> dans LTspice. En DC, un condensateur est un circuit ouvert et une bobine un court-circuit.</li>
+        <li>Chaque circuit a besoin d'une masse (0 V).</li>
+        <li>Les étiquettes vertes donnent la tension de chaque nœud par rapport à la masse ; le texte orange donne le courant dans chaque composant, la flèche indiquant son sens réel.</li>
+        <li>Touche un composant après Run pour voir sa tension, son courant, sa puissance et, pour un transistor, son régime de fonctionnement.</li>
+      </ul>
+      <h3 class="sec">Valeurs</h3>
+      <p>Suffixes SPICE : f, p, n, u (ou µ), m, k, meg, g. Comme dans LTspice, <code>m</code> veut dire milli et <code>meg</code> méga : <code>1M</code> vaut 1 mΩ, pas 1 MΩ. La valeur interprétée s'affiche sous le nom du champ.</p>
+      <h3 class="sec">Signes</h3>
+      <p>Source de tension : le courant fourni est celui qui sort par la borne +. Une valeur négative signifie que la source absorbe de l'énergie. Source de courant : le courant sort par la pointe de la flèche.</p>
+      <h3 class="sec">Modèles</h3>
+      <p>Diode exponentielle (Is, n, tension Zener). Bipolaire Ebers-Moll (Is, β, tension d'Early). MOSFET quadratique de niveau 1 (Vth, β, λ), substrat relié à la source. Ce sont des modèles d'enseignement : ils ne remplacent pas les modèles constructeur complets de LTspice.</p>
+      <h3 class="sec">Netlist</h3>
+      <p>L'onglet Netlist montre le circuit en syntaxe SPICE. Tu peux la copier dans LTspice, ou coller une netlist simple (R, C, L, V, I, D, Q, M, E, G et .model) et la simuler ici. Une netlist collée s'affiche dans Résultats mais ne redessine pas le schéma.</p>
+      <h3 class="sec">Réglages</h3>
+      <p>Le thème (clair, sombre ou automatique) et la langue se changent depuis le menu.</p>`,
+  },
+  en: {
+    'tab.schema': 'Schematic', 'tab.netlist': 'Netlist', 'tab.results': 'Results', 'a.views': 'Views',
+    'a.menu': 'Menu', 'a.undo': 'Undo', 'a.redo': 'Redo', 'a.fit': 'Fit to screen', 'a.tags': 'Show values on the schematic',
+    'a.rotate': 'Rotate the selected component', 'a.run': 'Run the simulation', 'a.svg': 'Circuit schematic', 'a.tools': 'Tools',
+    'a.close': 'Close', 'a.closeSheet': 'Close panel', 'a.net': 'SPICE netlist', 'a.netFrom': 'Regenerate the netlist from the schematic',
+    'net.from': 'Regenerate', 'net.copy': 'Copy', 'net.run': 'Simulate', 'net.syntax': 'Supported syntax',
+    'type.R': 'Resistor', 'type.C': 'Capacitor', 'type.L': 'Inductor', 'type.V': 'Voltage source', 'type.I': 'Current source',
+    'type.D': 'Diode', 'type.Q': 'Bipolar transistor', 'type.M': 'MOSFET', 'type.GND': 'Ground', 'type.LBL': 'Net label',
+    'type.E': 'Controlled voltage source', 'type.G': 'Controlled current source',
+    'tool.select': 'Select', 'tool.wire': 'Wire', 'tool.R': 'R', 'tool.C': 'C', 'tool.L': 'L', 'tool.V': 'V source', 'tool.I': 'I source',
+    'tool.D': 'Diode', 'tool.Q': 'BJT', 'tool.M': 'MOSFET', 'tool.GND': 'Ground', 'tool.LBL': 'Label',
+    'pin.from': 'from', 'pin.to': 'to',
+    'f.name': 'Name', 'f.nameHint': 'starts with {p}', 'f.node': 'Node name', 'f.nodeHint': 'empty = automatic name',
+    'f.R': 'Resistance', 'f.C': 'Capacitance', 'f.L': 'Inductance', 'f.V': 'Voltage', 'f.I': 'Current',
+    'f.type': 'Type', 'f.bv': 'Zener voltage', 'f.is': 'Is (saturation)', 'f.n': 'n (ideality)', 'f.bf': 'Gain β', 'f.vaf': 'VAF (Early)',
+    'f.vth': '|Vth| (threshold)', 'f.beta': 'β = Kp·W/L', 'f.lambda': 'λ (channel modulation)',
+    'opt.std': 'Standard', 'opt.sig': '1N4148', 'opt.led': 'Red LED', 'opt.zener': 'Zener',
+    'pv.bad': 'unreadable value', 'pv.inf': '= ∞ (disabled)',
+    'note.C': 'In DC, a capacitor behaves as an open circuit.',
+    'note.L': 'In DC, an inductor behaves as a short circuit.',
+    'note.V': 'The + terminal is marked on the symbol.',
+    'note.I': 'Current leaves through the arrow tip.',
+    'note.D': 'Exponential model I = Is·(exp(V/(n·VT)) − 1), VT = 25.9 mV.',
+    'note.Q': 'Ebers-Moll model. VAF = 0 disables the Early effect.',
+    'note.M': 'In saturation: ID = β/2·(VGS − Vth)²·(1 + λ·VDS). The bulk is tied to the source.',
+    'note.GND': 'The circuit\'s 0 V reference.',
+    'note.LBL': 'Two labels with the same name are connected. "0" or "gnd" means ground.',
+    'wire.title': 'Wire', 'wire.ground': 'This wire is connected to ground.', 'wire.none': 'This wire is not connected to any component.',
+    'btn.rotate': 'Rotate', 'btn.mirror': 'Mirror', 'btn.delete': 'Delete', 'btn.deleteWire': 'Delete wire', 'btn.copy': 'Copy',
+    'toast.nameUsed': 'The name {v} is already in use.', 'toast.merged': 'Node {v} already existed: both nodes are now connected.',
+    'toast.copied': 'Results copied', 'toast.netCopied': 'Netlist copied', 'toast.noCopy': 'Copy is not available here: select the text manually.',
+    'toast.netFrom': 'Netlist regenerated from the schematic', 'toast.cleared': 'Schematic cleared. Undo to get it back.', 'toast.example': 'Example loaded: {t}',
+    'hint.wire': 'Drag from one point to another to draw a wire. Use two fingers to move the view.',
+    'hint.place': 'Tap the sheet to place: {t}.',
+    'gen.header': '* PocketSpice, netlist generated from the schematic',
+    'gen.invalid': '{n}: invalid {label} ("{v}")', 'gen.zeroR': '{n}: zero resistance, use a wire instead',
+    'gen.empty': 'The schematic is empty: place components from the bottom toolbar.',
+    'gen.noGround': 'No ground: add a Ground symbol to set the 0 V reference.',
+    'gen.pin': 'Unconnected pin on {c} (node {n}).',
+    'lbl.resistance': 'resistance', 'lbl.value': 'value', 'lbl.bv': 'Zener voltage',
+    'run.fail': 'Cannot simulate', 'run.warn1': '1 warning', 'run.warnN': '{n} warnings',
+    'dl.ground': 'ground', 'dl.current': 'Current', 'dl.dir': 'Direction', 'dl.voltage': 'Voltage', 'dl.pdiss': 'Power dissipated',
+    'dl.lShort': '0 V (short circuit in DC)', 'dl.posTerm': 'Positive terminal', 'dl.cOpen': '0 A (open circuit in DC)',
+    'dl.supplied': 'Supplied current (out of +)', 'dl.psup': 'Power supplied', 'dl.vba': 'Voltage V({b}) − V({a})',
+    'dl.fwd': ' (forward)', 'dl.rev': ' (reverse)', 'dl.vak': 'Voltage VAK', 'dl.power': 'Power', 'dl.region': 'Region',
+    'reg.off': 'Cut-off', 'reg.active': 'Forward active', 'reg.sat': 'Saturation', 'reg.reverse': 'Reverse active',
+    'reg.m.off': 'Cut-off', 'reg.m.triode': 'Triode', 'reg.m.sat': 'Saturation',
+    'dl.icIn': 'IC (in)', 'dl.icOut': 'IC (out)', 'dl.ibIn': 'IB (in)', 'dl.ibOut': 'IB (out)', 'dl.ieOut': 'IE (out)', 'dl.ieIn': 'IE (in)',
+    'dl.idIn': 'ID (into drain)', 'dl.idOut': 'ID (out of drain)',
+    'res.emptyT': 'No results yet', 'res.emptyP': 'Draw a circuit and tap Run, or simulate a netlist from the Netlist tab.',
+    'res.title': 'Operating point', 'res.subS': 'Computed from the schematic in {n} iterations ({m}).', 'res.subN': 'Computed from the netlist in {n} iterations ({m}).',
+    'res.nodes': 'Node voltages', 'res.noNodes': 'No nodes other than ground.', 'res.comps': 'Components',
+    'res.between': 'Between {a} and {b}', 'res.fromTo': 'From {a} to {b}', 'res.copyHead': 'PocketSpice, operating point (.op)',
+    'menu.sub': 'Circuit simulator: DC operating point (.op).', 'menu.settings': 'Settings', 'menu.theme': 'Theme', 'menu.lang': 'Language',
+    'theme.auto': 'Auto', 'theme.light': 'Light', 'theme.dark': 'Dark',
+    'menu.examples': 'Examples', 'menu.circuit': 'Circuit', 'menu.new': 'New circuit', 'menu.newSub': 'Clears the schematic (can be undone).',
+    'menu.help': 'Help', 'menu.helpSub': 'Gestures, sign conventions and models.',
+    'ex.0.t': 'Voltage divider', 'ex.0.d': '12 V, 1 kΩ and 2 kΩ in series.',
+    'ex.1.t': 'LED with series resistor', 'ex.1.d': 'Current through a red LED from a 5 V supply.',
+    'ex.2.t': 'Zener regulator', 'ex.2.d': '5.1 V Zener with a 1 kΩ load.',
+    'ex.3.t': 'Common-emitter BJT stage', 'ex.3.d': 'Voltage-divider bias, NPN β = 100.',
+    'ex.4.t': 'Common-source MOSFET stage', 'ex.4.d': 'NMOS biased with a 2.5 V gate voltage.',
+    syntaxNote: 'Suffixes: f p n u m k meg g. As in SPICE, m = milli and meg = mega. The .tran, .ac and .dc analyses are ignored: only the operating point is computed.',
+    syntax: `* comment              ; end-of-line comment
+R1 in out 4.7k        C1 a 0 100n        L1 a b 10u
+V1 in 0 12            V2 a b DC 5        I1 0 a 1m
+D1 anode cathode D    (models: D, 1N4148, LED, ZENER)
+Q1 c b e NPN          Q2 c b e PNP
+M1 d g s NMOS         M2 d g s PMOS
+E1 out 0 inp inn 1e5  (voltage-controlled voltage source)
+G1 out 0 inp inn 1m   (voltage-controlled current source)
+.model DZ D(Is=1e-14 N=1 BV=6.2)
+.model Q2N3904 NPN(Is=6.7f Bf=416 Vaf=74)
+.model MN NMOS(Vto=0.7 Kp=100u Lambda=0.02)
+M3 d g s s MN W=20u L=1u
+.op`,
+    help: `<h3 class="sec">Drawing</h3>
+      <ul>
+        <li><b>Place</b>: pick a component in the bottom toolbar, then tap the sheet.</li>
+        <li><b>Connect</b>: choose the Wire tool, then drag from one terminal to another. A wire ending on a terminal or on another wire connects to it; a black dot marks every connection. Wires that cross without a dot are not connected.</li>
+        <li><b>Edit</b>: tap a component to change its value, rotate it or delete it. Drag it to move it: the wires follow. The rotate button also appears on the right of the sheet when a component is selected.</li>
+        <li><b>Rename</b>: tap a component and edit its Name field. Tap a wire to give its node a name.</li>
+        <li><b>View</b>: drag on the sheet to pan, pinch with two fingers to zoom.</li>
+        <li>Small hollow circles mark terminals or wires that are not connected.</li>
+      </ul>
+      <h3 class="sec">Simulating</h3>
+      <ul>
+        <li>Run computes the DC operating point, like the <code>.op</code> analysis in SPICE. In DC, a capacitor is an open circuit and an inductor a short circuit.</li>
+        <li>Every circuit needs a ground (0 V).</li>
+        <li>Green tags give the voltage of each node with respect to ground; orange text gives the current through each component, with an arrow showing its actual direction.</li>
+        <li>Tap a component after Run to see its voltage, current, power and, for a transistor, its operating region.</li>
+      </ul>
+      <h3 class="sec">Values</h3>
+      <p>SPICE suffixes: f, p, n, u (or µ), m, k, meg, g. As in SPICE, <code>m</code> means milli and <code>meg</code> means mega: <code>1M</code> is 1 mΩ, not 1 MΩ. The interpreted value is shown under the field name.</p>
+      <h3 class="sec">Signs</h3>
+      <p>Voltage source: the supplied current is the current leaving the + terminal. A negative value means the source is absorbing energy. Current source: current leaves through the arrow tip.</p>
+      <h3 class="sec">Models</h3>
+      <p>Exponential diode (Is, n, Zener voltage). Ebers-Moll bipolar transistor (Is, β, Early voltage). Level 1 square-law MOSFET (Vth, β, λ), with the bulk tied to the source. These are teaching models: they do not replace full manufacturer models.</p>
+      <h3 class="sec">Netlist</h3>
+      <p>The Netlist tab shows the circuit in SPICE syntax. You can copy it into another SPICE simulator, or paste a simple netlist (R, C, L, V, I, D, Q, M, E, G and .model) and simulate it here. A pasted netlist appears in Results but does not redraw the schematic.</p>
+      <h3 class="sec">Settings</h3>
+      <p>The theme (light, dark or automatic) and the language can be changed from the menu.</p>`,
+  },
+};
 
 </script>
 <script>
@@ -816,11 +1056,24 @@ if (typeof module !== 'undefined') module.exports = PS;
     R: [[0, -2], [0, 2]], C: [[0, -2], [0, 2]], L: [[0, -2], [0, 2]], V: [[0, -2], [0, 2]], I: [[0, -2], [0, 2]], D: [[0, -2], [0, 2]],
     Q: [[1, -2], [-2, 0], [1, 2]], M: [[1, -2], [-2, 0], [1, 2]], GND: [[0, 0]], LBL: [[0, 0]],
   };
-  const TYPE_LABEL = { R: 'Résistance', C: 'Condensateur', L: 'Bobine', V: 'Source de tension', I: 'Source de courant', D: 'Diode', Q: 'Transistor bipolaire', M: 'MOSFET', GND: 'Masse', LBL: 'Nom de nœud', E: 'Source commandée (tension)', G: 'Source commandée (courant)' };
-  const PIN_LABEL = { R: ['1', '2'], C: ['1', '2'], L: ['1', '2'], V: ['+', '−'], I: ['de', 'vers'], D: ['A', 'K'], Q: ['C', 'B', 'E'], M: ['D', 'G', 'S'], E: ['+', '−', 'c+', 'c−'], G: ['de', 'vers', 'c+', 'c−'] };
+  const PREFS_KEY = 'pocketspice.prefs';
+  function loadPrefs() {
+    let p = {};
+    try { p = JSON.parse(localStorage.getItem(PREFS_KEY) || '{}') || {}; } catch (_) { p = {}; }
+    const nav = String((navigator.language || 'fr')).toLowerCase();
+    return { theme: ['auto', 'light', 'dark'].includes(p.theme) ? p.theme : 'auto', lang: ['fr', 'en'].includes(p.lang) ? p.lang : (nav.startsWith('fr') ? 'fr' : 'en') };
+  }
+  const prefs = loadPrefs();
+  function savePrefs() { try { localStorage.setItem(PREFS_KEY, JSON.stringify(prefs)); } catch (_) { /* stockage indisponible */ } }
+  const t = (k, v = {}) => {
+    const s = (STR[prefs.lang] && STR[prefs.lang][k] !== undefined) ? STR[prefs.lang][k] : (STR.fr[k] !== undefined ? STR.fr[k] : k);
+    return typeof s === 'string' ? s.replace(/\{(\w+)\}/g, (_, x) => (v[x] ?? '')) : s;
+  };
+  const typeLabel = (ty) => t('type.' + ty);
+  const pinLabel = (ty) => ({ R: ['1', '2'], C: ['1', '2'], L: ['1', '2'], V: ['+', '−'], I: [t('pin.from'), t('pin.to')], D: ['A', 'K'], Q: ['C', 'B', 'E'], M: ['D', 'G', 'S'], E: ['+', '−', 'c+', 'c−'], G: [t('pin.from'), t('pin.to'), 'c+', 'c−'] })[ty] || [];
   const HW = { R: 9, C: 15, L: 11, V: 17, I: 17, D: 12 };
   const HALO = { two: [-16, -29, 32, 58], tr: [-31, -31, 58, 62], GND: [-16, -5, 32, 30] };
-  const HIT = { two: [-18, -32, 18, 32], tr: [-40, -34, 26, 34], GND: [-16, -4, 16, 26] };
+  const HIT = { two: [-18, -32, 18, 32], tr: [-40, -34, 26, 34], GND: [-18, -8, 18, 28] };
   const DEFAULT_PROPS = {
     R: { value: '1k' }, C: { value: '1u' }, L: { value: '1m' }, V: { value: '5' }, I: { value: '1m' },
     D: { kind: 'std', is: '1e-14', n: '1', bv: '5.1' },
@@ -830,43 +1083,32 @@ if (typeof module !== 'undefined') module.exports = PS;
   };
   const DIODE_PRESETS = { std: { is: '1e-14', n: '1' }, sig: { is: '2.52n', n: '1.752' }, led: { is: '1e-18', n: '2' }, zener: { is: '1e-14', n: '1' } };
   const FIELDS = {
-    R: [{ k: 'value', label: 'Résistance', unit: 'Ω' }],
-    C: [{ k: 'value', label: 'Capacité', unit: 'F' }],
-    L: [{ k: 'value', label: 'Inductance', unit: 'H' }],
-    V: [{ k: 'value', label: 'Tension', unit: 'V' }],
-    I: [{ k: 'value', label: 'Courant', unit: 'A' }],
+    R: [{ k: 'value', label: 'f.R', unit: 'Ω' }],
+    C: [{ k: 'value', label: 'f.C', unit: 'F' }],
+    L: [{ k: 'value', label: 'f.L', unit: 'H' }],
+    V: [{ k: 'value', label: 'f.V', unit: 'V' }],
+    I: [{ k: 'value', label: 'f.I', unit: 'A' }],
     D: [
-      { k: 'kind', label: 'Type', options: [['std', 'Standard'], ['sig', '1N4148'], ['led', 'LED rouge'], ['zener', 'Zener']] },
-      { k: 'bv', label: 'Tension Zener', unit: 'V', when: (p) => p.kind === 'zener' },
-      { k: 'is', label: 'Is (saturation)', unit: 'A' },
-      { k: 'n', label: 'n (idéalité)', unit: '' },
+      { k: 'kind', label: 'f.type', options: [['std', 'opt.std'], ['sig', 'opt.sig'], ['led', 'opt.led'], ['zener', 'opt.zener']] },
+      { k: 'bv', label: 'f.bv', unit: 'V', when: (p) => p.kind === 'zener' },
+      { k: 'is', label: 'f.is', unit: 'A' },
+      { k: 'n', label: 'f.n', unit: '' },
     ],
     Q: [
-      { k: 'pol', label: 'Type', options: [['NPN', 'NPN'], ['PNP', 'PNP']] },
-      { k: 'bf', label: 'Gain β', unit: '' },
-      { k: 'is', label: 'Is (saturation)', unit: 'A' },
-      { k: 'vaf', label: 'VAF (Early)', unit: 'V', inf: true },
+      { k: 'pol', label: 'f.type', options: [['NPN', 'NPN'], ['PNP', 'PNP']] },
+      { k: 'bf', label: 'f.bf', unit: '' },
+      { k: 'is', label: 'f.is', unit: 'A' },
+      { k: 'vaf', label: 'f.vaf', unit: 'V', inf: true },
     ],
     M: [
-      { k: 'pol', label: 'Type', options: [['NMOS', 'NMOS'], ['PMOS', 'PMOS']] },
-      { k: 'vth', label: '|Vth| (seuil)', unit: 'V' },
-      { k: 'beta', label: 'β = Kp·W/L', unit: 'A/V²' },
-      { k: 'lambda', label: 'λ (modulation)', unit: '1/V' },
+      { k: 'pol', label: 'f.type', options: [['NMOS', 'NMOS'], ['PMOS', 'PMOS']] },
+      { k: 'vth', label: 'f.vth', unit: 'V' },
+      { k: 'beta', label: 'f.beta', unit: 'A/V²' },
+      { k: 'lambda', label: 'f.lambda', unit: '1/V' },
     ],
-    LBL: [{ k: 'name', label: 'Nom du nœud', text: true }],
+    LBL: [{ k: 'name', label: 'f.node', text: true }],
   };
-  const NOTES = {
-    C: 'En DC, un condensateur se comporte comme un circuit ouvert.',
-    L: 'En DC, une bobine se comporte comme un court-circuit.',
-    V: 'La borne + est marquée sur le symbole.',
-    I: 'Le courant sort par la pointe de la flèche.',
-    D: 'Modèle exponentiel I = Is·(exp(V/(n·VT)) − 1), VT = 25,9 mV.',
-    Q: 'Modèle Ebers-Moll. VAF = 0 désactive l\'effet Early.',
-    M: 'En saturation : ID = β/2·(VGS − Vth)²·(1 + λ·VDS). Le substrat est relié à la source.',
-    GND: 'Référence 0 V du circuit.',
-    LBL: 'Deux noms identiques sont reliés entre eux. « 0 » ou « gnd » désigne la masse.',
-  };
-  const TOOLS = [['select', 'Sélection'], ['wire', 'Fil'], ['R', 'R'], ['C', 'C'], ['L', 'L'], ['V', 'Source V'], ['I', 'Source I'], ['D', 'Diode'], ['Q', 'Bipolaire'], ['M', 'MOSFET'], ['GND', 'Masse'], ['LBL', 'Nœud']];
+  const TOOLS = ['select', 'wire', 'R', 'C', 'L', 'V', 'I', 'D', 'Q', 'M', 'GND', 'LBL'];
 
   /* ---------------- état ---------------- */
   let S = { comps: [], wires: [] };
@@ -988,30 +1230,30 @@ if (typeof module !== 'undefined') module.exports = PS;
   /* ---------------- netlist depuis le schéma ---------------- */
   function genNetlist() {
     const nets = computeNets();
-    const L = ['* PocketSpice, netlist générée depuis le schéma'], M = [], errors = [], warnings = [];
+    const L = [t('gen.header')], M = [], errors = [], warnings = [];
     const sn = PS.spiceNum;
     const num = (c, key, label, pos) => {
       const v = PS.parseValue(c.props[key]);
-      if (isNaN(v) || (pos && !(v > 0))) { errors.push(`${c.name} : ${label} invalide (« ${c.props[key]} »)`); return null; }
+      if (isNaN(v) || (pos && !(v > 0))) { errors.push(t('gen.invalid', { n: c.name, label, v: c.props[key] })); return null; }
       return v;
     };
     for (const c of S.comps) {
       const n = nets.pinNodes.get(c.id); if (!n) continue;
       switch (c.type) {
         case 'R': {
-          const v = num(c, 'value', 'résistance');
-          if (v === 0) errors.push(`${c.name} : résistance nulle, utilise un fil à la place`);
+          const v = num(c, 'value', t('lbl.resistance'));
+          if (v === 0) errors.push(t('gen.zeroR', { n: c.name }));
           else if (v !== null) L.push(`${c.name} ${n[0]} ${n[1]} ${sn(v)}`);
           break;
         }
         case 'C': case 'L': case 'V': case 'I': {
-          const v = num(c, 'value', 'valeur');
+          const v = num(c, 'value', t('lbl.value'));
           if (v !== null) L.push(`${c.name} ${n[0]} ${n[1]} ${sn(v)}`);
           break;
         }
         case 'D': {
           const is = num(c, 'is', 'Is', true), nn = num(c, 'n', 'n', true);
-          const bv = c.props.kind === 'zener' ? num(c, 'bv', 'tension Zener', true) : 0;
+          const bv = c.props.kind === 'zener' ? num(c, 'bv', t('lbl.bv'), true) : 0;
           if (is && nn && bv !== null) {
             L.push(`${c.name} ${n[0]} ${n[1]} D_${c.name}`);
             M.push(`.model D_${c.name} D(Is=${sn(is)} N=${sn(nn)}${bv ? ` BV=${sn(bv)} IBV=1m` : ''})`);
@@ -1037,15 +1279,15 @@ if (typeof module !== 'undefined') module.exports = PS;
         }
       }
     }
-    if (!S.comps.some((c) => c.type !== 'GND' && c.type !== 'LBL')) errors.push('Le schéma est vide : place des composants depuis la barre du bas.');
-    else if (!S.comps.some((c) => c.type === 'GND' || (c.type === 'LBL' && /^(0|gnd)$/i.test(String(c.props.name).trim())))) errors.push('Aucune masse : ajoute le symbole Masse pour fixer la référence 0 V.');
+    if (!S.comps.some((c) => c.type !== 'GND' && c.type !== 'LBL')) errors.push(t('gen.empty'));
+    else if (!S.comps.some((c) => c.type === 'GND' || (c.type === 'LBL' && /^(0|gnd)$/i.test(String(c.props.name).trim())))) errors.push(t('gen.noGround'));
     // broches isolées
     const count = new Map(), owner = new Map();
     for (const c of S.comps) {
       const n = nets.pinNodes.get(c.id); if (!n) continue;
       n.forEach((nm) => { count.set(nm, (count.get(nm) || 0) + 1); owner.set(nm, c.name); });
     }
-    for (const [nm, k] of count) if (k === 1 && /^N\d{3,}$/.test(nm)) warnings.push(`Broche non connectée sur ${owner.get(nm)} (nœud ${nm}).`);
+    for (const [nm, k] of count) if (k === 1 && /^N\d{3,}$/.test(nm)) warnings.push(t('gen.pin', { c: owner.get(nm), n: nm }));
     L.push(...M, '.op', '.end');
     return { text: L.join('\n'), errors, warnings };
   }
@@ -1229,44 +1471,42 @@ if (typeof module !== 'undefined') module.exports = PS;
   /* ---------------- résultats : lignes par composant ---------------- */
   function deviceLines(d) {
     const [a, b] = d.nodes;
-    const N = (n) => (n === '0' ? 'masse' : n);
+    const N = (n) => (n === '0' ? t('dl.ground') : n);
     switch (d.type) {
       case 'R': case 'L': {
         let i = d.i, v = d.v, n1 = a, n2 = b;
         if (i < 0) { i = -i; v = -v; [n1, n2] = [n2, n1]; }
-        const rows = [['Courant', fmt(i, 'A', TI)], ['Sens', i > TI ? `${N(n1)} → ${N(n2)}` : '—']];
-        if (d.type === 'R') rows.push(['Tension', fmt(v, 'V', TV)], ['Puissance dissipée', fmt(d.p, 'W', TI)]);
-        else rows.push(['Tension', '0 V (court-circuit en DC)']);
+        const rows = [[t('dl.current'), fmt(i, 'A', TI)], [t('dl.dir'), i > TI ? `${N(n1)} → ${N(n2)}` : '—']];
+        if (d.type === 'R') rows.push([t('dl.voltage'), fmt(v, 'V', TV)], [t('dl.pdiss'), fmt(d.p, 'W', TI)]);
+        else rows.push([t('dl.voltage'), t('dl.lShort')]);
         return rows;
       }
       case 'C': {
         let v = d.v, n1 = a;
         if (v < 0) { v = -v; n1 = b; }
-        return [['Tension', fmt(v, 'V', TV)], ['Borne positive', v > TV ? N(n1) : '—'], ['Courant', '0 A (circuit ouvert en DC)']];
+        return [[t('dl.voltage'), fmt(v, 'V', TV)], [t('dl.posTerm'), v > TV ? N(n1) : '—'], [t('dl.current'), t('dl.cOpen')]];
       }
-      case 'V': return [['Tension', fmt(d.v, 'V', TV)], ['Courant fourni (sort par +)', fmt(-d.i, 'A', TI)], ['Puissance fournie', fmt(-d.p, 'W', TI)]];
-      case 'I': return [['Courant', fmt(d.i, 'A', TI)], [`Tension V(${b}) − V(${a})`, fmt(-d.v, 'V', TV)], ['Puissance fournie', fmt(-d.p, 'W', TI)]];
+      case 'V': return [[t('dl.voltage'), fmt(d.v, 'V', TV)], [t('dl.supplied'), fmt(-d.i, 'A', TI)], [t('dl.psup'), fmt(-d.p, 'W', TI)]];
+      case 'I': return [[t('dl.current'), fmt(d.i, 'A', TI)], [t('dl.vba', { a, b }), fmt(-d.v, 'V', TV)], [t('dl.psup'), fmt(-d.p, 'W', TI)]];
       case 'D': {
         const ai = Math.abs(d.i);
-        return [['Courant', fmt(ai, 'A', TI) + (ai > TI ? (d.i >= 0 ? ' (direct)' : ' (inverse)') : '')], ['Tension VAK', fmt(d.v, 'V', TV)], ['Puissance', fmt(d.p, 'W', TI)]];
+        return [[t('dl.current'), fmt(ai, 'A', TI) + (ai > TI ? (d.i >= 0 ? t('dl.fwd') : t('dl.rev')) : '')], [t('dl.vak'), fmt(d.v, 'V', TV)], [t('dl.power'), fmt(d.p, 'W', TI)]];
       }
       case 'Q': {
         const npn = d.pol > 0;
-        const reg = { off: 'Bloqué', active: 'Actif (direct)', sat: 'Saturé', reverse: 'Actif inverse' }[d.reg];
         const ic = npn ? d.Ic : -d.Ic, ib = npn ? d.Ib : -d.Ib, ie = npn ? -d.Ie : d.Ie;
-        const rows = [['Régime', reg], [npn ? 'IC (entrant)' : 'IC (sortant)', fmt(ic, 'A', TI)], [npn ? 'IB (entrant)' : 'IB (sortant)', fmt(ib, 'A', TI)], [npn ? 'IE (sortant)' : 'IE (entrant)', fmt(ie, 'A', TI)],
+        const rows = [[t('dl.region'), t('reg.' + d.reg)], [t(npn ? 'dl.icIn' : 'dl.icOut'), fmt(ic, 'A', TI)], [t(npn ? 'dl.ibIn' : 'dl.ibOut'), fmt(ib, 'A', TI)], [t(npn ? 'dl.ieOut' : 'dl.ieIn'), fmt(ie, 'A', TI)],
           [npn ? 'VBE' : 'VEB', fmt(npn ? d.vbe : -d.vbe, 'V', TV)], [npn ? 'VCE' : 'VEC', fmt(npn ? d.vce : -d.vce, 'V', TV)]];
         if (Math.abs(ib) > 1e-12) rows.push(['IC / IB', (ic / ib).toFixed(1)]);
-        rows.push(['Puissance', fmt(d.p, 'W', TI)]);
+        rows.push([t('dl.power'), fmt(d.p, 'W', TI)]);
         return rows;
       }
       case 'M': {
         const n = d.pol > 0;
-        const reg = { off: 'Bloqué', triode: 'Ohmique (triode)', sat: 'Saturation' }[d.reg];
-        return [['Régime', reg], [n ? 'ID (entrant au drain)' : 'ID (sortant du drain)', fmt(n ? d.Id : -d.Id, 'A', TI)], [n ? 'VGS' : 'VSG', fmt(n ? d.vgs : -d.vgs, 'V', TV)], [n ? 'VDS' : 'VSD', fmt(n ? d.vds : -d.vds, 'V', TV)],
-          [n ? 'VGS − Vth' : 'VSG − |Vth|', fmt(d.vov, 'V', TV)], ['Puissance', fmt(d.p, 'W', TI)]];
+        return [[t('dl.region'), t('reg.m.' + d.reg)], [t(n ? 'dl.idIn' : 'dl.idOut'), fmt(n ? d.Id : -d.Id, 'A', TI)], [n ? 'VGS' : 'VSG', fmt(n ? d.vgs : -d.vgs, 'V', TV)], [n ? 'VDS' : 'VSD', fmt(n ? d.vds : -d.vds, 'V', TV)],
+          [n ? 'VGS − Vth' : 'VSG − |Vth|', fmt(d.vov, 'V', TV)], [t('dl.power'), fmt(d.p, 'W', TI)]];
       }
-      default: return [['Tension', fmt(d.v, 'V', TV)], ['Courant', fmt(d.i, 'A', TI)]];
+      default: return [[t('dl.voltage'), fmt(d.v, 'V', TV)], [t('dl.current'), fmt(d.i, 'A', TI)]];
     }
   }
   const rowsHtml = (rows) => rows.map(([k, v]) => `<div class="row"><span>${esc(k)}</span><b>${esc(v)}</b></div>`).join('');
@@ -1275,8 +1515,8 @@ if (typeof module !== 'undefined') module.exports = PS;
   function preview(f, s) {
     if (f.text) return '';
     const v = PS.parseValue(s);
-    if (isNaN(v)) return 'valeur illisible';
-    if (f.inf && v === 0) return '= ∞ (désactivé)';
+    if (isNaN(v)) return t('pv.bad');
+    if (f.inf && v === 0) return t('pv.inf');
     return '= ' + fmt(v, f.unit);
   }
   function readingsHtml(c) {
@@ -1292,53 +1532,60 @@ if (typeof module !== 'undefined') module.exports = PS;
     return d ? `<div class="readout">${rowsHtml(deviceLines(d))}</div>` : '';
   }
   function updateReadings() { const el = $('#readings'); if (el && sel && sel.kind === 'comp') el.innerHTML = readingsHtml(byId(sel.id)); }
+  function netLabels(nets, nm) { return S.comps.filter((c) => c.type === 'LBL' && nets.nodeOfPoint(c.x, c.y) === nm); }
+  function inputHtml(id, label, hint, value) {
+    return `<div class="field"><label for="${id}">${label}<span class="hint" id="p${id}">${esc(hint)}</span></label><input id="${id}" value="${esc(value)}" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" enterkeyhint="done"></div>`;
+  }
   function renderSheet() {
     if (!sel) { sheet.hidden = true; positionFloat(); return; }
     let h = '';
-    const close = '<button class="iconbtn sm" data-act="close" aria-label="Fermer la fiche"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg></button>';
+    const close = `<button class="iconbtn sm" data-act="close" aria-label="${t('a.closeSheet')}"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg></button>`;
     if (sel.kind === 'wire') {
       const w = wireById(sel.id);
       if (!w) { sel = null; return renderSheet(); }
-      const nm = computeNets().nodeOfPoint(w.x1, w.y1);
-      h += `<div class="sh-head"><h3 class="sh-title">Fil</h3>${close}</div>`;
-      h += `<p class="note">${nm ? (nm === '0' ? 'Relié à la masse.' : `Nœud ${esc(nm)}`) : 'Ce fil n\'est relié à aucun composant.'}</p>`;
+      const nets = computeNets(), nm = nets.nodeOfPoint(w.x1, w.y1);
+      h += `<div class="sh-head"><h3 class="sh-title">${t('wire.title')}</h3>${close}</div>`;
+      if (!nm) h += `<p class="note">${t('wire.none')}</p>`;
+      else if (nm === '0') h += `<p class="note">${t('wire.ground')}</p>`;
       if (nm && results && results.source === 'schematic') {
         const v = nm === '0' ? 0 : results.res.nodeV[nm];
-        if (v !== undefined) h += `<div class="readout">${rowsHtml([[`V(${nm})`, fmt(v, 'V', TV)]])}</div>`;
+        if (v !== undefined) h += `<div class="readout">${rowsHtml([[`V(${nm === '0' ? '0' : nm})`, fmt(v, 'V', TV)]])}</div>`;
       }
-      h += '<div class="actions"><button class="btn danger" data-act="del">Supprimer le fil</button></div>';
+      if (nm && nm !== '0') h += inputHtml('fnode', t('f.node'), t('f.nodeHint'), nm);
+      h += `<div class="actions"><button class="btn danger" data-act="del">${t('btn.deleteWire')}</button></div>`;
     } else {
       const c = byId(sel.id);
       if (!c) { sel = null; return renderSheet(); }
-      if (c.type === 'GND' || c.type === 'LBL') h += `<div class="sh-head"><h3 class="sh-title">${TYPE_LABEL[c.type]}</h3>${close}</div>`;
-      else h += `<div class="sh-head"><input class="sh-name" id="shName" value="${esc(c.name)}" aria-label="Nom du composant" autocapitalize="characters" autocorrect="off" spellcheck="false" enterkeyhint="done"><span class="sh-type">${TYPE_LABEL[c.type]}</span>${close}</div>`;
+      const named = c.type !== 'GND' && c.type !== 'LBL';
+      h += `<div class="sh-head"><h3 class="sh-title">${esc(named ? c.name : typeLabel(c.type))}</h3>${named ? `<span class="sh-type">${typeLabel(c.type)}</span>` : ''}${close}</div>`;
       h += `<div id="readings">${readingsHtml(c)}</div>`;
+      if (named) h += inputHtml('fname', t('f.name'), t('f.nameHint', { p: c.type }), c.name);
       for (const f of FIELDS[c.type] || []) {
         if (f.when && !f.when(c.props)) continue;
         if (f.options) {
-          h += `<div class="field"><span class="flabel">${f.label}</span><div class="chips">${f.options.map(([v, l]) => `<button class="chip${c.props[f.k] === v ? ' on' : ''}" data-k="${f.k}" data-v="${v}">${l}</button>`).join('')}</div></div>`;
+          h += `<div class="field"><span class="flabel">${t(f.label)}</span><div class="chips">${f.options.map(([v, l]) => `<button class="chip${c.props[f.k] === v ? ' on' : ''}" data-k="${f.k}" data-v="${v}">${t(l)}</button>`).join('')}</div></div>`;
         } else {
-          h += `<div class="field"><label for="f_${f.k}">${f.label}<span class="hint" id="p_${f.k}">${esc(preview(f, c.props[f.k]))}</span></label><input id="f_${f.k}" data-k="${f.k}" value="${esc(c.props[f.k])}" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" enterkeyhint="done"></div>`;
+          h += `<div class="field"><label for="f_${f.k}">${t(f.label)}<span class="hint" id="p_${f.k}">${esc(preview(f, c.props[f.k]))}</span></label><input id="f_${f.k}" data-k="${f.k}" value="${esc(c.props[f.k])}" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" enterkeyhint="done"></div>`;
         }
       }
-      if (NOTES[c.type]) h += `<p class="note">${NOTES[c.type]}</p>`;
+      h += `<p class="note">${t('note.' + c.type)}</p>`;
       h += '<div class="actions">';
-      if (c.type !== 'LBL') h += '<button class="btn" data-act="rot">Pivoter</button>';
-      if (c.type === 'Q' || c.type === 'M') h += '<button class="btn" data-act="mir">Miroir</button>';
-      h += '<button class="btn danger" data-act="del">Supprimer</button></div>';
+      if (c.type !== 'LBL') h += `<button class="btn" data-act="rot">${t('btn.rotate')}</button>`;
+      if (c.type === 'Q' || c.type === 'M') h += `<button class="btn" data-act="mir">${t('btn.mirror')}</button>`;
+      h += `<button class="btn danger" data-act="del">${t('btn.delete')}</button></div>`;
     }
     sheet.innerHTML = h;
     sheet.hidden = false;
     sheet.querySelectorAll('[data-act]').forEach((b) => { b.onclick = () => act(b.dataset.act); });
     sheet.querySelectorAll('.chip').forEach((b) => { b.onclick = () => setProp(b.dataset.k, b.dataset.v, true); });
+    sheet.querySelectorAll('input').forEach((inp) => { inp.onkeydown = (e) => { if (e.key === 'Enter') inp.blur(); }; });
     sheet.querySelectorAll('input[data-k]').forEach((inp) => {
       const c = byId(sel.id), f = (FIELDS[c.type] || []).find((x) => x.k === inp.dataset.k);
       inp.oninput = () => { const p = $('#p_' + inp.dataset.k); if (p) p.textContent = preview(f, inp.value); };
       inp.onchange = () => setProp(inp.dataset.k, inp.value.trim(), c.type === 'LBL');
-      inp.onkeydown = (e) => { if (e.key === 'Enter') inp.blur(); };
     });
-    const nmIn = $('#shName');
-    if (nmIn) { nmIn.onchange = () => rename(nmIn); nmIn.onkeydown = (e) => { if (e.key === 'Enter') nmIn.blur(); }; }
+    const fn = $('#fname'); if (fn) fn.onchange = () => rename(fn);
+    const fd = $('#fnode'); if (fd) fd.onchange = () => renameNode(fd);
     positionFloat();
   }
   function ensureVisible() {
@@ -1351,6 +1598,8 @@ if (typeof module !== 'undefined') module.exports = PS;
     if (bot > limit) { view.ty -= Math.min(bot - limit, Math.max(0, top - 70)); render(); }
   }
   function positionFloat() {
+    const c = sel && sel.kind === 'comp' && byId(sel.id);
+    $('#rotBtn').hidden = !(c && c.type !== 'LBL');
     runBtn.classList.toggle('compact', !sheet.hidden);
     runBtn.style.bottom = (sheet.hidden ? 14 : sheet.offsetHeight + 12) + 'px';
     runBtn.style.visibility = (!sheet.hidden && sheet.offsetHeight > wrap.clientHeight - 140) ? 'hidden' : '';
@@ -1358,8 +1607,14 @@ if (typeof module !== 'undefined') module.exports = PS;
   function setProp(k, v, rerender) {
     const c = sel && sel.kind === 'comp' && byId(sel.id);
     if (!c || c.props[k] === v) return;
+    let merged = false;
+    if (c.type === 'LBL' && k === 'name') {
+      const nets0 = computeNets(), own = nets0.nodeOfPoint(c.x, c.y), key = cleanNode(v).toLowerCase();
+      merged = S.comps.some((o) => o !== c && o.type === 'LBL' && cleanNode(o.props.name).toLowerCase() === key && nets0.nodeOfPoint(o.x, o.y) !== own);
+    }
     pushUndo();
     c.props[k] = v;
+    if (merged) toast(t('toast.merged', { v: cleanNode(v) }));
     if (c.type === 'D' && k === 'kind') Object.assign(c.props, DIODE_PRESETS[v]);
     edited();
     if (rerender) renderSheet(); else updateReadings();
@@ -1370,8 +1625,32 @@ if (typeof module !== 'undefined') module.exports = PS;
     if (!v) { inp.value = c.name; return; }
     if (v[0].toUpperCase() !== c.type) v = c.type + v;
     if (v === c.name) { inp.value = v; return; }
-    if (S.comps.some((o) => o !== c && o.name && o.name.toLowerCase() === v.toLowerCase())) { toast(`Le nom ${v} est déjà utilisé.`); inp.value = c.name; return; }
+    if (S.comps.some((o) => o !== c && o.name && o.name.toLowerCase() === v.toLowerCase())) { toast(t('toast.nameUsed', { v })); inp.value = c.name; return; }
     pushUndo(); c.name = v; inp.value = v; edited();
+    const ttl = sheet.querySelector('.sh-title'); if (ttl) ttl.textContent = v;
+  }
+  function renameNode(inp) {
+    const w = sel && sel.kind === 'wire' && wireById(sel.id); if (!w) return;
+    const nets = computeNets(), cur = nets.nodeOfPoint(w.x1, w.y1);
+    if (!cur || cur === '0') return;
+    const raw = inp.value.trim(), lbls = netLabels(nets, cur);
+    if (!raw) {
+      if (lbls.length) { pushUndo(); S.comps = S.comps.filter((c) => !lbls.includes(c)); edited(); renderSheet(); }
+      else inp.value = cur;
+      return;
+    }
+    const v = cleanNode(raw);
+    if (v === cur) { inp.value = v; return; }
+    const merged = [...nets.nodePoint.keys()].some((n) => n !== cur && n.toLowerCase() === v.toLowerCase()) || /^(0|gnd)$/i.test(v);
+    pushUndo();
+    if (lbls.length) lbls.forEach((c) => { c.props.name = v; });
+    else {
+      const len = Math.abs(w.x2 - w.x1) + Math.abs(w.y2 - w.y1);
+      const x = len >= 2 ? Math.round((w.x1 + w.x2) / 2) : w.x1, y = len >= 2 ? Math.round((w.y1 + w.y2) / 2) : w.y1;
+      S.comps.push({ id: nid(), type: 'LBL', x, y, rot: 0, mirror: false, name: '', props: { name: v } });
+    }
+    edited(); renderSheet();
+    if (merged) toast(t('toast.merged', { v }));
   }
   function act(a) {
     if (a === 'close') return setSel(null);
@@ -1465,28 +1744,28 @@ if (typeof module !== 'undefined') module.exports = PS;
     }
     S.wires = S.wires.filter((w) => w.x1 !== w.x2 || w.y1 !== w.y2);
   }
-  function setTool(t) {
-    tool = t;
-    document.querySelectorAll('#tools button').forEach((b) => b.classList.toggle('on', b.dataset.tool === t));
+  function setTool(tl) {
+    tool = tl;
+    document.querySelectorAll('#tools button').forEach((b) => b.classList.toggle('on', b.dataset.tool === tl));
     const hint = $('#hint');
-    if (t === 'select') hint.hidden = true;
+    if (tl === 'select') hint.hidden = true;
     else {
       hint.hidden = false;
-      hint.textContent = t === 'wire' ? 'Glisse d\'un point à un autre pour tracer un fil. Deux doigts pour déplacer la vue.' : `Touche la feuille pour placer : ${TYPE_LABEL[t].toLowerCase()}.`;
+      hint.textContent = tl === 'wire' ? t('hint.wire') : t('hint.place', { t: typeLabel(tl).toLowerCase() });
       if (sel) setSel(null);
     }
   }
   function buildToolbar() {
-    const icon = (t) => {
-      const fake = { type: t, props: { ...DEFAULT_PROPS[t] } };
-      if (t === 'select') return '<svg viewBox="-24 -24 48 48"><g class="sym"><path class="fill" d="M-9,-15 L-9,11 L-2.5,5 L2,15 L6.5,13 L2,3.5 L10,3.5 Z"/></g></svg>';
-      if (t === 'wire') return '<svg viewBox="-24 -24 48 48"><g class="sym"><polyline points="-15,13 -15,-9 15,-9"/><circle class="fill" cx="-15" cy="13" r="3"/><circle class="fill" cx="15" cy="-9" r="3"/></g></svg>';
-      if (t === 'GND') return `<svg viewBox="-24 -24 48 48"><g class="sym" transform="translate(0 -11) scale(1.15)">${symbol(fake)}</g></svg>`;
-      if (t === 'LBL') return '<svg viewBox="-24 -24 48 48"><g class="sym"><rect x="-15" y="-15" width="30" height="16" rx="2"/><line x1="0" y1="1" x2="0" y2="13"/><rect class="fill" x="-2.5" y="11" width="5" height="5"/></g></svg>';
-      if (t === 'Q' || t === 'M') return `<svg viewBox="-24 -24 48 48"><g class="sym" transform="translate(5 0) scale(0.55)">${symbol(fake)}</g></svg>`;
+    const icon = (ty) => {
+      const fake = { type: ty, props: { ...DEFAULT_PROPS[ty] } };
+      if (ty === 'select') return '<svg viewBox="-24 -24 48 48"><g class="sym"><path class="fill" d="M-9,-15 L-9,11 L-2.5,5 L2,15 L6.5,13 L2,3.5 L10,3.5 Z"/></g></svg>';
+      if (ty === 'wire') return '<svg viewBox="-24 -24 48 48"><g class="sym"><polyline points="-15,13 -15,-9 15,-9"/><circle class="fill" cx="-15" cy="13" r="3"/><circle class="fill" cx="15" cy="-9" r="3"/></g></svg>';
+      if (ty === 'GND') return `<svg viewBox="-24 -24 48 48"><g class="sym" transform="translate(0 -11) scale(1.15)">${symbol(fake)}</g></svg>`;
+      if (ty === 'LBL') return '<svg viewBox="-24 -24 48 48"><g class="sym"><rect x="-15" y="-15" width="30" height="16" rx="2"/><line x1="0" y1="1" x2="0" y2="13"/><rect class="fill" x="-2.5" y="11" width="5" height="5"/></g></svg>';
+      if (ty === 'Q' || ty === 'M') return `<svg viewBox="-24 -24 48 48"><g class="sym" transform="translate(5 0) scale(0.55)">${symbol(fake)}</g></svg>`;
       return `<svg viewBox="-24 -24 48 48"><g class="sym" transform="rotate(90) scale(0.55)">${symbol(fake)}</g></svg>`;
     };
-    $('#tools').innerHTML = TOOLS.map(([t, l]) => `<button data-tool="${t}" aria-label="${t === 'select' || t === 'wire' ? l : TYPE_LABEL[t]}"${t === 'select' ? ' class="on"' : ''}>${icon(t)}<span>${l}</span></button>`).join('');
+    $('#tools').innerHTML = TOOLS.map((ty) => `<button data-tool="${ty}" aria-label="${ty === 'select' || ty === 'wire' ? t('tool.' + ty) : typeLabel(ty)}"${ty === tool ? ' class="on"' : ''}>${icon(ty)}<span>${t('tool.' + ty)}</span></button>`).join('');
     document.querySelectorAll('#tools button').forEach((b) => { b.onclick = () => setTool(tool === b.dataset.tool && tool !== 'select' ? 'select' : b.dataset.tool); });
   }
 
@@ -1660,15 +1939,15 @@ if (typeof module !== 'undefined') module.exports = PS;
   function runSchematic() {
     hideBanner();
     const g = genNetlist();
-    if (g.errors.length) { showBanner('err', 'Simulation impossible', g.errors.join('\n')); return; }
+    if (g.errors.length) { showBanner('err', t('run.fail'), g.errors.join('\n')); return; }
     if (netEl.value === lastGen || !netEl.value.trim()) { netEl.value = g.text; lastGen = g.text; save(); }
     const r = PS.run(g.text);
-    if (!r.ok) { if (results && results.source === 'schematic') results = null; showBanner('err', 'Simulation impossible', r.error); render(); renderResults(); return; }
+    if (!r.ok) { if (results && results.source === 'schematic') results = null; showBanner('err', t('run.fail'), r.error); render(); renderResults(); return; }
     r.warnings = [...g.warnings, ...r.warnings];
     results = { source: 'schematic', res: r };
     if (!showTags) { showTags = true; $('#tagBtn').setAttribute('aria-pressed', 'true'); }
     render(); renderSheet(); renderResults();
-    if (r.warnings.length) showBanner('warn', r.warnings.length > 1 ? `${r.warnings.length} avertissements` : '1 avertissement', r.warnings.join('\n'));
+    if (r.warnings.length) showBanner('warn', r.warnings.length > 1 ? t('run.warnN', { n: r.warnings.length }) : t('run.warn1'), r.warnings.join('\n'));
   }
   function runNetlist() {
     const msg = $('#netMsg');
@@ -1685,40 +1964,40 @@ if (typeof module !== 'undefined') module.exports = PS;
   function renderResults() {
     const el = $('#resBody');
     if (!results) {
-      el.innerHTML = '<div class="empty"><h2 class="rt">Pas encore de résultats</h2><p>Dessine un circuit et appuie sur Run, ou simule une netlist depuis l\'onglet Netlist.</p></div>';
+      el.innerHTML = `<div class="empty"><h2 class="rt">${t('res.emptyT')}</h2><p>${t('res.emptyP')}</p></div>`;
       return;
     }
     const r = results.res;
-    let h = `<div class="res-head"><div><h2 class="rt">Point de fonctionnement</h2><p class="sub">Calculé depuis ${results.source === 'schematic' ? 'le schéma' : 'la netlist'} en ${r.iterations} itérations (${esc(r.method)}).</p></div><button class="btn sm" id="copyRes">Copier</button></div>`;
+    let h = `<div class="res-head"><div><h2 class="rt">${t('res.title')}</h2><p class="sub">${t(results.source === 'schematic' ? 'res.subS' : 'res.subN', { n: r.iterations, m: esc(r.method) })}</p></div><button class="btn sm" id="copyRes">${t('btn.copy')}</button></div>`;
     if (r.warnings.length) h += `<div class="warnbox">${r.warnings.map((w) => `<p>${esc(w)}</p>`).join('')}</div>`;
     const names = Object.keys(r.nodeV).filter((n) => n !== '0').sort(natural);
-    h += `<h3 class="sec">Tensions aux nœuds</h3><div class="readout">${names.length ? rowsHtml(names.map((n) => [`V(${n})`, fmt(r.nodeV[n], 'V', TV)])) : '<p>Aucun nœud en dehors de la masse.</p>'}</div>`;
-    h += '<h3 class="sec">Composants</h3>';
+    h += `<h3 class="sec">${t('res.nodes')}</h3><div class="readout">${names.length ? rowsHtml(names.map((n) => [`V(${n})`, fmt(r.nodeV[n], 'V', TV)])) : `<p>${t('res.noNodes')}</p>`}</div>`;
+    h += `<h3 class="sec">${t('res.comps')}</h3>`;
     for (const [nm, d] of Object.entries(r.devices)) {
-      const pl = PIN_LABEL[d.type] || [], nn = d.nodes.map((n) => (n === '0' ? 'masse' : n));
+      const pl = pinLabel(d.type), nn = d.nodes.map((n) => (n === '0' ? t('dl.ground') : n));
       let pins;
-      if (['R', 'C', 'L'].includes(d.type)) pins = `Entre ${nn[0]} et ${nn[1]}`;
-      else if (d.type === 'I') pins = `De ${nn[0]} vers ${nn[1]}`;
+      if (['R', 'C', 'L'].includes(d.type)) pins = t('res.between', { a: nn[0], b: nn[1] });
+      else if (d.type === 'I') pins = t('res.fromTo', { a: nn[0], b: nn[1] });
       else pins = nn.map((n, i) => `${pl[i] || i + 1} ${n}`).join(', ');
-      h += `<div class="dev"><h4>${esc(nm)}<span>${TYPE_LABEL[d.type] || ''}</span></h4><p class="pins">${esc(pins)}</p>${deviceLines(d).map(([k, v]) => `<div class="kv"><span>${esc(k)}</span><b>${esc(v)}</b></div>`).join('')}</div>`;
+      h += `<div class="dev"><h4>${esc(nm)}<span>${typeLabel(d.type)}</span></h4><p class="pins">${esc(pins)}</p>${deviceLines(d).map(([k, v]) => `<div class="kv"><span>${esc(k)}</span><b>${esc(v)}</b></div>`).join('')}</div>`;
     }
     el.innerHTML = h;
-    $('#copyRes').onclick = () => copyText(resultsText(), 'Résultats copiés');
+    $('#copyRes').onclick = () => copyText(resultsText(), t('toast.copied'));
   }
   function resultsText() {
-    const r = results.res, out = ['PocketSpice, point de fonctionnement (.op)', ''];
+    const r = results.res, out = [t('res.copyHead'), ''];
     for (const n of Object.keys(r.nodeV).filter((n) => n !== '0').sort(natural)) out.push(`V(${n}) = ${fmt(r.nodeV[n], 'V', TV)}`);
     out.push('');
-    for (const [nm, d] of Object.entries(r.devices)) out.push(`${nm} : ` + deviceLines(d).map(([k, v]) => `${k} ${v}`).join(' ; '));
+    for (const [nm, d] of Object.entries(r.devices)) out.push(`${nm}: ` + deviceLines(d).map(([k, v]) => `${k} ${v}`).join('; '));
     return out.join('\n').replace(/−/g, '-');
   }
-  async function copyText(t, ok) {
-    try { await navigator.clipboard.writeText(t); toast(ok); }
+  async function copyText(txt, ok) {
+    try { await navigator.clipboard.writeText(txt); toast(ok); }
     catch (_) {
       const ta = document.createElement('textarea');
-      ta.value = t; ta.style.position = 'fixed'; ta.style.opacity = '0'; document.body.appendChild(ta); ta.select();
+      ta.value = txt; ta.style.position = 'fixed'; ta.style.opacity = '0'; document.body.appendChild(ta); ta.select();
       let done = false; try { done = document.execCommand('copy'); } catch (__) { /* ignore */ }
-      ta.remove(); toast(done ? ok : 'Copie impossible ici : sélectionne le texte à la main.');
+      ta.remove(); toast(done ? ok : t('toast.noCopy'));
     }
   }
 
@@ -1731,70 +2010,72 @@ if (typeof module !== 'undefined') module.exports = PS;
   }
   let toastT = 0;
   function toast(t) { const el = $('#toast'); el.textContent = t; el.classList.add('show'); clearTimeout(toastT); toastT = setTimeout(() => el.classList.remove('show'), 1800); }
-  function openModal(html) {
-    const m = $('#modal');
-    $('#modalCard').innerHTML = html;
+  function openModal(html, keepScroll) {
+    const m = $('#modal'), card = $('#modalCard'), top = card.scrollTop;
+    card.innerHTML = html;
+    card.scrollTop = keepScroll ? top : 0;
     m.hidden = false;
     m.onclick = (e) => { if (e.target === m) closeModal(); };
     m.querySelectorAll('[data-close]').forEach((b) => { b.onclick = closeModal; });
   }
   function closeModal() { $('#modal').hidden = true; }
-  const closeBtn = '<button class="iconbtn sm" data-close aria-label="Fermer"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg></button>';
-  function openMenu() {
-    openModal(`<div class="mh"><h2>PocketSpice</h2>${closeBtn}</div>
-      <p class="sub">Simulateur de circuits : point de fonctionnement DC (.op).</p>
-      <h3 class="sec">Exemples</h3>
-      ${EXAMPLES.map((e, i) => `<button class="mitem" data-ex="${i}">${e.title}<small>${e.desc}</small></button>`).join('')}
-      <h3 class="sec">Circuit</h3>
-      <button class="mitem" data-a="new">Nouveau circuit<small>Efface le schéma (annulable).</small></button>
-      <button class="mitem" data-a="help">Aide<small>Gestes, conventions de signe et modèles.</small></button>`);
+  const closeBtn = () => `<button class="iconbtn sm" data-close aria-label="${t('a.close')}"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg></button>`;
+  function openMenu(keepScroll) {
+    const chips = (attr, cur, list) => `<div class="chips">${list.map(([v, l]) => `<button class="chip${cur === v ? ' on' : ''}" ${attr}="${v}">${l}</button>`).join('')}</div>`;
+    openModal(`<div class="mh"><h2>PocketSpice</h2>${closeBtn()}</div>
+      <p class="sub">${t('menu.sub')}</p>
+      <h3 class="sec">${t('menu.settings')}</h3>
+      <div class="field"><span class="flabel">${t('menu.theme')}</span>${chips('data-theme-set', prefs.theme, [['auto', t('theme.auto')], ['light', t('theme.light')], ['dark', t('theme.dark')]])}</div>
+      <div class="field"><span class="flabel">${t('menu.lang')}</span>${chips('data-lang-set', prefs.lang, [['fr', 'Français'], ['en', 'English']])}</div>
+      <h3 class="sec">${t('menu.examples')}</h3>
+      ${EXAMPLES.map((e, i) => `<button class="mitem" data-ex="${i}">${t('ex.' + i + '.t')}<small>${t('ex.' + i + '.d')}</small></button>`).join('')}
+      <h3 class="sec">${t('menu.circuit')}</h3>
+      <button class="mitem" data-a="new">${t('menu.new')}<small>${t('menu.newSub')}</small></button>
+      <button class="mitem" data-a="help">${t('menu.help')}<small>${t('menu.helpSub')}</small></button>`, keepScroll === true);
+    document.querySelectorAll('[data-theme-set]').forEach((b) => { b.onclick = () => { prefs.theme = b.dataset.themeSet; savePrefs(); applyTheme(); openMenu(true); }; });
+    document.querySelectorAll('[data-lang-set]').forEach((b) => { b.onclick = () => { prefs.lang = b.dataset.langSet; savePrefs(); applyLang(); openMenu(true); }; });
     document.querySelectorAll('[data-ex]').forEach((b) => { b.onclick = () => { closeModal(); loadExample(+b.dataset.ex, true); }; });
-    $('[data-a="new"]').onclick = () => { closeModal(); pushUndo(); S.comps = []; S.wires = []; sel = null; results = null; edited(); renderSheet(); renderResults(); setTab('schema'); toast('Schéma effacé. Annuler pour le récupérer.'); };
+    $('[data-a="new"]').onclick = () => { closeModal(); pushUndo(); S.comps = []; S.wires = []; sel = null; results = null; edited(); renderSheet(); renderResults(); setTab('schema'); toast(t('toast.cleared')); };
     $('[data-a="help"]').onclick = openHelp;
   }
   function openHelp() {
-    openModal(`<div class="mh"><h2>Aide</h2>${closeBtn}</div><div class="help">
-      <h3 class="sec">Dessiner</h3>
-      <ul>
-        <li><b>Placer</b> : choisis un composant dans la barre du bas, puis touche la feuille.</li>
-        <li><b>Relier</b> : outil Fil, puis glisse d'une borne à l'autre. Un fil qui arrive sur une borne ou sur un autre fil s'y connecte ; un point noir marque chaque connexion. Deux fils qui se croisent sans point ne sont pas reliés.</li>
-        <li><b>Modifier</b> : touche un composant pour changer sa valeur, le pivoter ou le supprimer. Glisse-le pour le déplacer : les fils suivent.</li>
-        <li><b>Vue</b> : glisse sur la feuille pour te déplacer, pince à deux doigts pour zoomer.</li>
-        <li>Les petits cercles vides signalent une borne ou un fil non connecté.</li>
-      </ul>
-      <h3 class="sec">Simuler</h3>
-      <ul>
-        <li>Run calcule le point de fonctionnement DC, comme <code>.op</code> dans LTspice. En DC, un condensateur est un circuit ouvert et une bobine un court-circuit.</li>
-        <li>Chaque circuit a besoin d'une masse (0 V).</li>
-        <li>Les étiquettes vertes donnent la tension de chaque nœud par rapport à la masse ; le texte orange donne le courant dans chaque composant, la flèche indiquant son sens réel.</li>
-        <li>Touche un composant après Run pour voir sa tension, son courant, sa puissance et, pour un transistor, son régime de fonctionnement.</li>
-      </ul>
-      <h3 class="sec">Valeurs</h3>
-      <p>Suffixes SPICE : f, p, n, u (ou µ), m, k, meg, g. Comme dans LTspice, <code>m</code> veut dire milli et <code>meg</code> méga : <code>1M</code> vaut 1 mΩ, pas 1 MΩ. La valeur interprétée s'affiche sous le nom du champ.</p>
-      <h3 class="sec">Signes</h3>
-      <p>Source de tension : le courant fourni est celui qui sort par la borne +. Une valeur négative signifie que la source absorbe de l'énergie. Source de courant : le courant sort par la pointe de la flèche.</p>
-      <h3 class="sec">Modèles</h3>
-      <p>Diode exponentielle (Is, n, tension Zener). Bipolaire Ebers-Moll (Is, β, tension d'Early). MOSFET quadratique de niveau 1 (Vth, β, λ), substrat relié à la source. Ce sont des modèles d'enseignement : ils ne remplacent pas les modèles constructeur complets de LTspice.</p>
-      <h3 class="sec">Netlist</h3>
-      <p>L'onglet Netlist montre le circuit en syntaxe SPICE. Tu peux la copier dans LTspice, ou coller une netlist simple (R, C, L, V, I, D, Q, M, E, G et .model) et la simuler ici. Une netlist collée s'affiche dans Résultats mais ne redessine pas le schéma.</p>
-    </div>`);
+    openModal(`<div class="mh"><h2>${t('menu.help')}</h2>${closeBtn()}</div><div class="help">${t('help')}</div>`);
+  }
+  function applyTheme() {
+    if (prefs.theme === 'auto') document.documentElement.removeAttribute('data-theme');
+    else document.documentElement.setAttribute('data-theme', prefs.theme);
+  }
+  function applyLang() {
+    PS.setLang(prefs.lang);
+    document.documentElement.lang = prefs.lang;
+    document.querySelectorAll('[data-i18n]').forEach((el) => { el.textContent = t(el.dataset.i18n); });
+    document.querySelectorAll('[data-i18n-aria]').forEach((el) => { el.setAttribute('aria-label', t(el.dataset.i18nAria)); });
+    $('#syntaxPre').textContent = t('syntax');
+    $('#syntaxNote').textContent = t('syntaxNote');
+    buildToolbar(); setTool(tool); hideBanner();
+    $('#toast').classList.remove('show');
+    const had = results && results.source;
+    results = null;
+    if (had === 'schematic') runSchematic();
+    else if (had === 'netlist') { const r = PS.run(netEl.value); if (r.ok) results = { source: 'netlist', res: r }; }
+    renderSheet(); renderResults(); render();
   }
 
   /* ---------------- exemples ---------------- */
   const EXAMPLES = [
-    { title: 'Diviseur de tension', desc: '12 V, 1 kΩ et 2 kΩ en série.',
+    {
       c: [['V', 0, 4, 0, 'V1', { value: '12' }], ['R', 4, 2, 0, 'R1', { value: '1k' }], ['R', 4, 6, 0, 'R2', { value: '2k' }], ['GND', 0, 8, 0], ['LBL', 6, 4, 0, '', { name: 'out' }]],
       w: [[0, 2, 0, 0], [0, 0, 4, 0], [0, 6, 0, 8], [0, 8, 4, 8], [4, 4, 6, 4]] },
-    { title: 'LED et résistance série', desc: 'Calcul du courant dans une LED rouge sous 5 V.',
+    {
       c: [['V', 0, 4, 0, 'V1', { value: '5' }], ['R', 3, 0, 1, 'R1', { value: '330' }], ['D', 6, 4, 0, 'D1', { kind: 'led', is: '1e-18', n: '2', bv: '5.1' }], ['GND', 0, 8, 0]],
       w: [[0, 2, 0, 0], [0, 0, 1, 0], [5, 0, 6, 0], [6, 0, 6, 2], [0, 6, 0, 8], [0, 8, 6, 8], [6, 6, 6, 8]] },
-    { title: 'Régulateur Zener', desc: 'Zener 5,1 V avec charge de 1 kΩ.',
+    {
       c: [['V', 0, 4, 0, 'V1', { value: '12' }], ['R', 3, 0, 1, 'R1', { value: '470' }], ['D', 6, 4, 2, 'D1', { kind: 'zener', is: '1e-14', n: '1', bv: '5.1' }], ['R', 11, 4, 0, 'R2', { value: '1k' }], ['GND', 0, 8, 0], ['LBL', 11, 0, 0, '', { name: 'out' }]],
       w: [[0, 2, 0, 0], [0, 0, 1, 0], [5, 0, 11, 0], [6, 0, 6, 2], [11, 0, 11, 2], [0, 6, 0, 8], [0, 8, 11, 8], [6, 6, 6, 8], [11, 6, 11, 8]] },
-    { title: 'Bipolaire en émetteur commun', desc: 'Polarisation par pont de base, NPN β = 100.',
+    {
       c: [['V', -5, 4, 0, 'VCC', { value: '12' }], ['R', 0, 4, 0, 'R1', { value: '47k' }], ['R', 0, 8, 0, 'R2', { value: '10k' }], ['R', 6, 2, 0, 'RC', { value: '2.2k' }], ['R', 6, 10, 0, 'RE', { value: '470' }], ['Q', 5, 6, 0, 'Q1', { pol: 'NPN', bf: '100', is: '1e-14', vaf: '0' }], ['GND', -5, 12, 0], ['LBL', 10, 4, 0, '', { name: 'out' }]],
       w: [[-5, 2, -5, 0], [-5, 0, 6, 0], [0, 2, 0, 0], [0, 6, 3, 6], [-5, 6, -5, 12], [-5, 12, 6, 12], [0, 10, 0, 12], [6, 4, 10, 4]] },
-    { title: 'MOSFET en source commune', desc: 'NMOS polarisé par une tension de grille de 2,5 V.',
+    {
       c: [['V', -5, 4, 0, 'VDD', { value: '10' }], ['V', 0, 8, 0, 'VG', { value: '2.5' }], ['R', 6, 2, 0, 'RD', { value: '2k' }], ['M', 5, 6, 0, 'M1', { pol: 'NMOS', vth: '1', beta: '2m', lambda: '0' }], ['GND', -5, 12, 0], ['LBL', 10, 4, 0, '', { name: 'out' }]],
       w: [[-5, 2, -5, 0], [-5, 0, 6, 0], [0, 6, 3, 6], [-5, 6, -5, 12], [-5, 12, 6, 12], [0, 10, 0, 12], [6, 8, 6, 12], [6, 4, 10, 4]] },
   ];
@@ -1807,7 +2088,7 @@ if (typeof module !== 'undefined') module.exports = PS;
     setTab('schema');
     edited(); renderSheet(); renderResults(); fit();
     if (netEl.value === lastGen || !netEl.value.trim()) syncNetlist(true);
-    if (undoable) toast(`Exemple chargé : ${ex.title}`);
+    if (undoable) toast(t('toast.example', { t: t('ex.' + i + '.t') }));
   }
 
   /* ---------------- sauvegarde ---------------- */
@@ -1829,17 +2110,19 @@ if (typeof module !== 'undefined') module.exports = PS;
   }
 
   /* ---------------- démarrage ---------------- */
-  buildToolbar();
+  applyTheme();
+  applyLang();
   document.querySelectorAll('.seg button').forEach((b) => { b.onclick = () => setTab(b.dataset.tab); });
-  $('#menuBtn').onclick = openMenu;
+  $('#menuBtn').onclick = () => openMenu(false);
   $('#undoBtn').onclick = undo;
   $('#redoBtn').onclick = redo;
   $('#fitBtn').onclick = fit;
   $('#tagBtn').onclick = () => { showTags = !showTags; $('#tagBtn').setAttribute('aria-pressed', String(showTags)); render(); };
   runBtn.onclick = runSchematic;
+  $('#rotBtn').onclick = () => act('rot');
   $('#netRun').onclick = runNetlist;
-  $('#netFrom').onclick = () => { syncNetlist(true); $('#netMsg').hidden = true; toast('Netlist reprise du schéma'); };
-  $('#netCopy').onclick = () => copyText(netEl.value, 'Netlist copiée');
+  $('#netFrom').onclick = () => { syncNetlist(true); $('#netMsg').hidden = true; toast(t('toast.netFrom')); };
+  $('#netCopy').onclick = () => copyText(netEl.value, t('toast.netCopied'));
   netEl.addEventListener('input', save);
   window.addEventListener('resize', () => { schedule(); positionFloat(); });
   document.addEventListener('keydown', (e) => {

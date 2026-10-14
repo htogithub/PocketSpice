@@ -4,7 +4,7 @@ A mobile-first electrical circuit simulator that runs in the browser. Draw a sch
 
 The app is a single HTML file: nothing to install, no account required. On iPhone, open the website link from the About section in Safari, then tap Share → "Add to Home Screen" to use it like a native app.
 
-> The user interface is in French.
+> The interface is available in English and French.
 
 ---
 
@@ -19,10 +19,11 @@ The app is a single HTML file: nothing to install, no account required. On iPhon
   - wires that cross without a dot are not connected.
 - Unconnected terminals and wire ends are flagged with a small hollow circle.
 - Drag components to move them: attached wires follow and stay orthogonal.
-- Rotate in 90° steps; mirror transistors.
+- Rotate in 90° steps from the component panel or the floating rotate button; mirror transistors.
 - Navigation: drag to pan, pinch to zoom, one button to fit the whole circuit.
 - Undo / redo (up to 120 steps).
 - Component panel: name, value and model parameters. The interpreted value is shown live (for example `4.7k` = 4.7 kΩ).
+- Renaming: edit a component's Name field, or tap a wire to give its node a name.
 - Net labels: two labels with the same name are connected; `0` or `gnd` means ground.
 
 ### Components
@@ -80,7 +81,7 @@ Two extra elements are available in netlists: E (voltage-controlled voltage sour
   - R to rotate;
   - Ctrl/Cmd + Z to undo;
   - Esc to deselect.
-- Light and dark mode, following the device setting.
+- Light, dark or automatic theme, and English or French interface, chosen from the menu and remembered.
 - The circuit and the netlist are saved automatically in the browser.
 - Five ready-to-run examples:
   - voltage divider;
@@ -95,8 +96,8 @@ Two extra elements are available in netlists: E (voltage-controlled voltage sour
 ## Quick start
 1. Pick a component in the bottom toolbar, then tap the sheet to place it.
 2. Tap the component to set its value.
-3. With the **Fil** (wire) tool, drag from one terminal to another to connect components.
-4. Add a **Masse** (ground).
+3. With the **Wire** tool, drag from one terminal to another to connect components.
+4. Add a **Ground**.
 5. Tap **Run**.
 
 ---
