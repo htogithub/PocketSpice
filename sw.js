@@ -1,5 +1,5 @@
 /* PocketSpice : fonctionnement hors ligne */
-const CACHE = 'pocketspice-v3';
+const CACHE = 'pocketspice-v4';
 const CORE = ['./', './index.html', './manifest.webmanifest', './icon-180.png', './icon-192.png', './icon-512.png'];
 
 self.addEventListener('install', (e) => {
